@@ -7,7 +7,9 @@ html{
 	font-size: 16px;
 	position: relative;  
 }
+
 .login{
+        background-color: white;
 	width: 300px;
 	border: 1px solid #E1E1E1;
 	border-radius: 4px;
