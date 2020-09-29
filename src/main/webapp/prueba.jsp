@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 27/09/2020, 08:32:02 PM
+    Document   : prueba.jsp
+    Created on : 27/09/2020, 11:46:38 PM
     Author     : mauri
 --%>
 
@@ -8,15 +8,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>
-
-        <a href="login.jsp">login</a>
-        <a href="inP.jsp">Registro</a>
-
-
     </body>
 </html>
