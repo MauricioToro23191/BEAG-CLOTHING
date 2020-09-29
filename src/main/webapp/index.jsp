@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="login.html">login</a>
+        <a href="login.jsp">login</a>
+        <a href="inP.jsp">Registro</a>
     </body>
 </html>
