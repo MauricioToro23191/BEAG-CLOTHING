@@ -19,7 +19,8 @@
         </div>
         <hr>
         <div>
-            <form action="Controlador" method="POST">
+            <form action="ControladorLogin" method="POST">
+                
                 ID:<br>
                 <input type="text" name="txtCorreo" value="${us.getCorreo()}"><br>
                 Contraseña<br>
