@@ -19,7 +19,7 @@
         </div>
         <hr>
         <div>
-            <form action="ControladorLogin" method="POST">
+            <form action="ControladorLogin" method="POST">             
                 Correo:<br>
                 <input type="text" name="txtCorreo"><br>
                 Contraseña<br>
