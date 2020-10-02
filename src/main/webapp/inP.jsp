@@ -1,10 +1,9 @@
 <%-- 
-    Document   : index
+    Document   : inP
     Created on : 16/09/2020, 11:07:52 PM
     Author     : mauri
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,7 @@
                 <input type="submit" value="Nuevo" name="accion" />
             </form>
             <hr>
-        </div>
+        </div>     
         <div>
             <table border="1">
                 <thead>
@@ -32,32 +31,31 @@
                         <th>Apellidos</th>
                         <th>Direccion</th>
                         <th>Telefono</th>
-                        <th>Celular</th>                 
+                        <th>Celular</th>  
+                        <th>opciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="dato" items="${datos}" >
+                    <c:forEach var="dato" items="${datos}">
                         <tr>
                             <td>${dato.getCorreo()}</td>
                             <td>${dato.getContrasena()}</td>
                             <td>${dato.getNombres()}</td>
                             <td>${dato.getApellidos()}</td>
                             <td>${dato.getDireccion()}</td>
-                            <td>${dato.getTeledono()}</td>
+                            <td>${dato.getTelefono()}</td>
                             <td>${dato.getCelular()}</td>
                             <td>
                                 <form action="ControladorLogin" method="POST">
-                                    <input type="hidden" value="${dato.getId()}" name="id">
+                                    <input type="hidden" value="${dato.getCorreo()}" name="Correo">
                                     <input type="submit" value="Editar" name="accion" />
                                     <input type="submit" value="Eliminar" name="accion" />
                                 </form>
                             </td>
-                            
                         </tr>
                     </c:forEach>
-
-
-                </tbody>
+      
+            </tbody>
             </table>
 
         </div>
