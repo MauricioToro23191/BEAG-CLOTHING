@@ -10,9 +10,7 @@ body {
   font-family: initial;
   height: 100vh;
 }
-nav a{
-    text-decoration: none;
-}
+
 h1{
     text-align: center;
 }
@@ -21,28 +19,12 @@ hr{
     border-color: black;
 }
 
-nav{
-    background-color: whitesmoke;
-    color: black;
-    padding: 30px;
-    margin: 3px;
-    text-align: center;
-}
-nav span {
-    margin: 5px;
-    padding: 5px;
-    padding-left: 10px;
-    
-}
+
 .usuario{
     float: right;
     padding-left: 20px;
 }
-nav img{
-    height: 50%;
-    float:left;
-   
-}
+
 
 table{
     width: 50%;
@@ -85,7 +67,8 @@ table th{
 
 .total{
     padding: 10px;
-    margin-top:20px;
+    margin-top:200px;
+    background: activecaption;
     
 }
 .eliminar{
@@ -149,4 +132,112 @@ footer{
     .col-10 {width: 83.33%;}
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;} 
+}
+
+
+.detalle{
+    margin-top: 100px;
+    margin-left: 100px;
+}
+.imgDetalle{
+    margin-left: 100px;
+    margin-top: 100px;
+    position: static; 
+    padding-right: 5px;
+}
+
+.detalle span{
+    float:right;
+    padding-right: 20%; 
+    color: gray;
+}
+.detalle div{
+    padding: 10px;
+    margin-left: 60px;
+}
+
+/*
+tomado de internet
+*/
+
+
+.btn-abrir-popup {
+	padding: 0 20px;
+	margin-bottom: 20px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	color: #fff;
+	background: #5E7DE3;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: .3s ease all;
+	cursor: pointer;
+}
+
+
+
+
+/* ------------------------- */
+/* POPUP */
+/* ------------------------- */
+
+.overlay {
+	background: rgba(0,0,0,.3);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	justify-content: center;
+	display: flex;
+        visibility: hidden;
+}
+
+.overlay.active {
+	visibility: visible;
+}
+
+.popup {
+	background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	padding: 20px;
+	width: 1100px;
+	transition: .3s ease all;
+	transform: scale(0.7);
+	opacity: 0;
+}
+
+.popup .btn-cerrar-popup {
+	font-size: 16px;
+	line-height: 16px;
+	display: block;
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.popup .btn-cerrar-popup:hover {
+	color: #000;
+}
+
+
+
+/* ------------------------- */
+/* ANIMACIONES */
+/* ------------------------- */
+.popup.active {	transform: scale(1); opacity: 1; }
+
+footer{
+    height: 100px;
+    color: white; 
+    background-color: dimgray;
+    padding-bottom: 300px;
+    float: bottom;
+}
+.asd{
+   width: 1100px;
+        
 }
