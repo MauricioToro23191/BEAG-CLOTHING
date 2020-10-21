@@ -5,117 +5,148 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/Estilo_carrito.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="css/bulma.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/Estilo_carrito.css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> 
     </head>
     <body>
-        <nav>
-            <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
-            <span>inicio</span>
-            <a href="Carrito.html"><span>carrito</span></a>
-            <span>historial</span>
-            <span>notificación</span>    
-            <span>contactenos</span>
-            <span><a href="Inicio_Sesion.html" class="usuario"> Cerrar sesión   </a> <a href="Registro.html" class="usuario"> Juan Perez     </a> </span>
-            
-        </nav>
+        <!-- Barra de navegación -->
+        <header>
+
+            <nav class="navbar">
+                <header class="nabvar-mobile is-size-5-mobile">
+                    <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile">MENÚ</a>
+                    <a class="navbar-mobile-link has-text-white" href="index.html">BEAG CLOTHING</a>
+                </header>
+                <nav class="nav-menu --nav-dark-light" id="mySidenav">
+                    <form class="form-group " action="#">
+                        <div class="form-group-container">
+                            <input type="text" class="form-group-input" placeholder="Buscar...">
+                        </div>
+                    </form>
+                    <div class="form-group-container">
+                        <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
+                    </div>
+
+                    <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="UsuarioRegistrado.html.html">BEAG CLOTHING</a>
+                    <ul class="nav-menu-ul">
+
+                        <li class="nav-menu-item" id="men">
+                            <a class="nav-menu-link link-submenu active" href="UsuarioRegistrado.html">Inicio </a>
+                        </li>
+                        <li class="nav-menu-item" id="women">
+                            <a href="Carrito.html" class="nav-menu-link link-submenu">Carrito</a>
+                        </li>
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.html" class="nav-menu-link ">Hombre</a></li>
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.html" class="nav-menu-link">Mujer</a></li>
+                        <li class="nav-menu-item"><a href="user.html" class="nav-menu-link">Administrador</a></li>
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.html" class="nav-menu-link">Juan Andres</a></li>
+                        <li class="nav-menu-item"><a href="Inicio_Sesion.html" class="nav-menu-link">Cerrar Sesión</a></li>
+
+                    </ul>
+                </nav>
+            </nav>
+        </header>
         <section>
-            <div class="col-8 col-s-12">
-                <h1>Carrito</h1>
-                <hr>
-                <table class="table table-hover ">
-                    <thead>
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input class="eliminar"type="submit" value="X" />
-                                <img style="width: 100px" src="img/busoG.jpg"/>
-                                 
-                            </td>
-                            <td style="vertical-align:middle;"> buso Negro</td>
-                            <td style="vertical-align:middle;">$20.000</td>
-                            <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                            <td style="vertical-align:middle;">$40.000</td>
-                        </tr>
-                        <tr>
+            <div style="padding-top: 100px">
+                <div class="col-8 col-s-12 ">
+                    <h1 >Carrito</h1>
+                    <hr>
+                    <table class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="color: white">Producto</th>
+                                <th scope="col" style="color: white">Nombre</th>
+                                <th scope="col" style="color: white">Precio</th>
+                                <th scope="col" style="color: white">Cantidad</th>
+                                <th scope="col" style="color: white">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input class="eliminar"type="submit" value="X" />
+                                    <img style="width: 100px" src="img/catalogo/Blanca.jpeg"/>
 
-                            <td>
-                                <input class="eliminar"type="submit" value="X" />
-                                <img style="width: 100px" src="img/buso.jpeg"/>
-                                 
-                            </td>
-                            <td style="vertical-align:middle;"> buso M</td>
-                            <td style="vertical-align:middle;">$20.000</td>
-                            <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                            <td style="vertical-align:middle;">$40.000</td>
-                        </tr>
-                        <tr>
+                                </td>
+                                <td style="vertical-align:middle;">Camiseta blanca</td>
+                                <td style="vertical-align:middle;">$20.000</td>
+                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
+                                <td style="vertical-align:middle;">$40.000</td>
+                            </tr>
+                            <tr>
 
-                            <td>
-                                <input class="eliminar" type="submit" value="X" />
-                                <img style="width: 100px" src="img/buso3.jpg"/>
-                                 
-                            </td>
-                            <td style="vertical-align:middle;"> buso H</td>
-                            <td style="vertical-align:middle;">$20.000</td>
-                            <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                            <td style="vertical-align:middle;">$40.000</td>
-                        </tr>
-                        <tr>
+                                <td>
+                                    <input class="eliminar"type="submit" value="X" />
+                                    <img style="width: 100px" src="img/catalogo/NegraMangasVerdes.jpeg"/>
 
-                            <td>
-                                <input class="eliminar" type="submit" value="X" />
-                                <img style="width: 100px" src="img/gorra.jpeg"/>
-                                 
-                            </td>
-                            <td style="vertical-align:middle;"> gorra</td>
-                            <td style="vertical-align:middle;">$20.000</td>
-                            <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                            <td style="vertical-align:middle;">$40.000</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <hr>
-                
+                                </td>
+                                <td style="vertical-align:middle;"> Camiseta negra con mangas verdes</td>
+                                <td style="vertical-align:middle;">$20.000</td>
+                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
+                                <td style="vertical-align:middle;">$40.000</td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <input class="eliminar" type="submit" value="X" />
+                                    <img style="width: 100px" src="img/catalogo/GorraGris.jpeg"/>
+
+                                </td>
+                                <td style="vertical-align:middle;"> Gorra blanca</td>
+                                <td style="vertical-align:middle;">$20.000</td>
+                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
+                                <td style="vertical-align:middle;">$40.000</td>
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <input class="eliminar" type="submit" value="X" />
+                                    <img style="width: 100px" src="img/catalogo/VinotintoMangaBlanca.jpeg"/>
+
+                                </td>
+                                <td style="vertical-align:middle;"> camiseta vinotinto</td>
+                                <td style="vertical-align:middle;">$20.000</td>
+                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
+                                <td style="vertical-align:middle;">$40.000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                </div>
+                <div class="total col-4 col-s-12 " style="padding-top: 50px">
+                    <h1>Total</h1>
+                    <h4>Subtotal <span id="subtotal">$160.000</span></h4>
+                    <h4>Envío <span id="subtotal">$9.000</span> </h4>
+                    <hr>
+                    <h4>Total <span id="subtotal">$169.000</span> </h4>
+                    <hr>
+                    <input type="submit" value="Actualizar carrito" class="botonActualizar" />
+                    <input type="submit" value="Ir a la caja" class="botonCaja"/>
+
+                </div>
             </div>
 
-        </div>
-        <span class="col-4 col-s-12 total">
-            <h1>Total</h1>
-            <h4>Subtotal <span id="subtotal">$160.000</span></h4>
-            <h4>Envío <span id="subtotal">$9.000</span> </h4>
-            <hr>
-            <h4>Total <span id="subtotal">$169.000</span> </h4>
-            <hr>
-            <input type="submit" value="Actualizar carrito" class="botonActualizar" />
-            <input type="submit" value="Ir a la caja" class="botonCaja"/>
 
-        </span>
 
-    </section>
-    <footer class="col-12">
-        <h1>Pie de pagina</h1>
-        <div>
-            <span>inicio</span>
-            <a href="mailto:email@Mailto.co.uk?subject=Subject Using Mailto.co.uk&body=Email Using Mailto.co.uk">Mailto.co.uk</a>
+        </section>
+        <footer class="col-12">
+            <h1>Pie de pagina</h1>
+            <div>
+                <span>inicio</span>
+                <a href="mailto:email@Mailto.co.uk?subject=Subject Using Mailto.co.uk&body=Email Using Mailto.co.uk">Mailto.co.uk</a>
 
-            <span>carrito</span>
-            <span>historial</span>
-            <span>notificación</span>    
-            <span>contactenos</span>
-        </div>
+                <span>carrito</span>
+                <span>historial</span>
+                <span>notificación</span>    
+                <span>contactenos</span>
+            </div>
 
 
 
-    </footer>
-</body>
+        </footer>
+    </body>
 </html>
