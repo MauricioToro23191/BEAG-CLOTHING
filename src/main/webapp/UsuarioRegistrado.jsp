@@ -69,377 +69,382 @@
                 <a class="nav-item has-text-weight-semibold" href="#">Mujeres</a>
                 <a class="nav-item has-text-weight-semibold" href="#">Niños</a>
                 <a class="nav-item has-text-weight-semibold" href="#">Niñas</a>
-                <button id="btn-abrir-popup" class="btn-abrir-popup">Abrir Ventana Emergente</button>
             </nav>
         </div>
         <!-- Sección de fotografías -->
         <div class="container">
-            <div class="columns is-multiline">
-                <div class="column is-full-mobile">
-                    <div class="columns is-centered is-mobile is-multiline">
-                        <!-- 1 Sección de fotografías -->
-                        <div class="column is-half column-full"  >
-                            <div class="card" style="width: 98%">
-                                <a href="#">
+            <label for="btn-modal" class="lbl-modal">
+                <div class="columns is-multiline">
+
+                    <div class="column is-full-mobile">
+                        <div class="columns is-centered is-mobile is-multiline">
+                            <!-- 1 Sección de fotografías -->
+
+                            <div class="column is-half column-full"  >
+                                <div for="btn-modal" class="card btn-abrir-popup" style="width: 98%" id="btn-abrir-popup">
                                     <span class="price">$89.99</span>
                                     <img src="img/catalogo/Blanca.jpeg" alt=""/>
-                                </a>
-                                <div class="card-info">
+                                    <div class="card-info">
 
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        Algodon</p>
-                                </div> 
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            Algodon</p>
+                                    </div> 
+                                </div>
                             </div>
-                        </div>
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$47.50</span>
-                                <img src="img/catalogo/BlancaMangaAul.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold">Camiceta asul Claro $47.50 </h4>
-                                    <p class="has-text-centered">Camiceta deportiva 
-                                        para Hombre  100%
-                                        cotton.</p>
+                            <div class="column is-half column-full">
+                                <div for="btn-modal" class="card" id="btn-abrir-popup">
+                                    <span class="price">$47.50</span>
+                                    <img src="img/catalogo/BlancaMangaAul.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold">Camiceta asul Claro $47.50 </h4>
+                                        <p class="has-text-centered">Camiceta deportiva 
+                                            para Hombre  100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card" id="btn-abrir-popup">
+                                    <span class="price">$65.95</span>
+
+                                    <img src="img/catalogo/VinotintoMangaBlanca.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $65.95 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$65.95</span>
+
+                                    <img src="img/catalogo/AzulMangaEstamp.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $65.95 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/CamisaAzul.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/CamisaGris.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/Chaqueta.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/VerdeMangasNegras.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/BusoCamuflado.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/GorraVerde.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/GorraNegra.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$89.99</span>
+                                    <img src="img/catalogo/GorraAmarilla.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
+                                            con mangas blancas $89.99 </h4>
+                                        <p class="has-text-centered">camiceta deportiva 100%
+                                            cotton.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$65.95</span>
+                    <!-- Segunda sección de fotografías -->
+                    <div class="column is-half is-full-mobile">
+                        <div class="columns is-mobile is-multiline">
 
-                                <img src="img/catalogo/VinotintoMangaBlanca.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $65.95 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/BlancaMangaNegra.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/BlancaMangaRoja.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$34.79</span>
+                                    <img src="img/catalogo/BlancaMangaVerde.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $34.79 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$34.79</span>
+                                    <img src="img/catalogo/GrisMangaAzul.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $34.79 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/GrisMangaRoja.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/GrisMangaVerde.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/NegraLLamaVerde.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/NegraMangasVerdes.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/Pantaloneta.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.</p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/GorraBlanca.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 
+                                        </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img src="img/catalogo/GorraGris.jpeg" alt=""/>
+                                    <div class="card-info">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 
+                                        </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-half column-full ">
+                                <div class="card">
+                                    <span class="price">$29.99</span>
+                                    <img class="" src="img/catalogo/GorraNegra.jpeg" alt=""/>
+                                    <div class="card-info ">
+                                        <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
+                                            Casual TEE $29.99 </h4>
+                                        <p class="has-text-centered">Classic casual t-shirt for women on the move.
+                                            100%
+                                            cotton.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$65.95</span>
-
-                                <img src="img/catalogo/AzulMangaEstamp.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $65.95 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/CamisaAzul.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/CamisaGris.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/Chaqueta.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/VerdeMangasNegras.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/BusoCamuflado.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/GorraVerde.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/GorraNegra.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$89.99</span>
-                                <img src="img/catalogo/GorraAmarilla.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> camiseta vinotinto
-                                        con mangas blancas $89.99 </h4>
-                                    <p class="has-text-centered">camiceta deportiva 100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-                <!-- Segunda sección de fotografías -->
-                <div class="column is-half is-full-mobile">
-                    <div class="columns is-mobile is-multiline">
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/BlancaMangaNegra.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/BlancaMangaRoja.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$34.79</span>
-                                <img src="img/catalogo/BlancaMangaVerde.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $34.79 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$34.79</span>
-                                <img src="img/catalogo/GrisMangaAzul.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $34.79 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/GrisMangaRoja.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/GrisMangaVerde.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/NegraLLamaVerde.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/NegraMangasVerdes.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/Pantaloneta.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/GorraBlanca.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img src="img/catalogo/GorraGris.jpeg" alt=""/>
-                                <div class="card-info">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column is-half column-full ">
-                            <div class="card">
-                                <span class="price">$29.99</span>
-                                <img class="" src="img/catalogo/GorraNegra.jpeg" alt=""/>
-                                <div class="card-info ">
-                                    <h4 class="has-text-black has-text-centered has-text-weight-bold"> Women's Burnt Orenge
-                                        Casual TEE $29.99 </h4>
-                                    <p class="has-text-centered">Classic casual t-shirt for women on the move.
-                                        100%
-                                        cotton.</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
-                </div>
-
-            </div>
+            </label>
         </div>
 
-        <div class="overlay" id="overlay"> 
-            <div class="popup" id="popup">
-                <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup" style="position: absolute ;  z-index: 3;;"><i class="fas fa-times"></i></a>  
+
+        <input type="checkbox" id="btn-modal">
+        <label for="btn-modal" class="lbl-modal">Abrir Modal</label>
+        <label for="btn-modal" class="lbl-modal"><div>Abrir Modal</div></label>
+
+        <div class="modal">
+            <div class="contenedor">
+                <header>Detalle del producto</header>
+                <label for="btn-modal">X</label>
                 <div class="contDetalle">
                     <div class="col-5 col-s-12">
                         <img src="img/catalogo/Blanca.jpeg" class="col-12 imgDetalle" alt="Producto">
@@ -471,14 +476,14 @@
                         <div>
                             precio <span>$70.000</span>
                         </div>
-                        <input type="button" class="botonActualizar" value="Agregar al carrito" >
-                        <input type="button" class="botonCaja" value="Ir a caja" >
+
                     </div>
 
                 </div>
             </div>
         </div>
+
         <script src="js/main.js"></script>
-        <script src="popup.js"></script>
+        <script src="js/popup.js"></script>
     </body>
 </html>
