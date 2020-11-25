@@ -40,9 +40,9 @@
                     <ul class="nav-menu-ul">
 
                         <li class="nav-menu-item" id="men">
-                            <a class="nav-menu-link link-submenu active" href="UsuarioRegistrado.jsp">Inicio </a>
+                            <a class="nav-menu-link link-submenu " href="UsuarioRegistrado.jsp">Inicio </a>
                         </li>
-                        <li class="nav-menu-item" id="women">
+                        <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
                         </li>
                         <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link ">Hombre</a></li>
@@ -122,16 +122,19 @@
                     </table>
                     <hr>
                 </div>
-                <div class="total col-4 col-s-12 " style="padding-top: 50px">
+                <div class="total col-4 col-s-12 " style="padding-top: 50px;padding-bottom: 80PX">
                     <h1>Total</h1>
+                    <hr>
                     <h4>Subtotal <span id="subtotal">$160.000</span></h4>
+                    <hr>
                     <h4>Envío <span id="subtotal">$9.000</span> </h4>
                     <hr>
                     <h4>Total <span id="subtotal">$169.000</span> </h4>
                     <hr>
-                    <input type="submit" value="Actualizar carrito" class="botonActualizar" />
-                    <input type="submit" value="Ir a la caja" class="botonCaja"/>
-
+                    <form method="POST" action="">
+                        <input type="submit" value="Actualizar carrito" class="botonActualizar" />
+                        <a href="Validar_Info_Envio.jsp">a<input type="submit" value="Siguiente" class="botonCaja"/></a>
+                    </form>
                 </div>
             </div>
 
@@ -149,9 +152,6 @@
                 <span>notificación</span>    
                 <span>contactenos</span>
             </div>
-
-
-
         </footer>
     </body>
 </html>
