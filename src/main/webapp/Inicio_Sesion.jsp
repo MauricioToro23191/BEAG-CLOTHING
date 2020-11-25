@@ -20,10 +20,10 @@
             </div>
 
             <h1>Iniciar sesión</h1>
-            <form>
+            <form method="POST" action="">
                 <!-- USERNAME INPUT -->
                 <label for="correo">Correo Electronico</label>
-                <input type="text" placeholder="ingresa el correo electronico">
+                <input type="text" placeholder="ingresa el correo electrónico">
                 <!-- PASSWORD INPUT -->
                 <label for="contrasena">Contraseña</label>
                 <input type="password" placeholder="Ingresa la contraseña">
