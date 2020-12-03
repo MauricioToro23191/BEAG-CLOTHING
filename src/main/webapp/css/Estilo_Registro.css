@@ -10,7 +10,7 @@ body {
 
 .login-box {
   width: 50%;
-  height: 94%;
+  height: 122%;
   border-radius: 10px;
   background: #fff;
   color: #000;
@@ -25,19 +25,20 @@ body {
 .login-box .avatar {
     
   width: 150px;
-  height: 120px;
+  height: 150px;
   position: absolute;
   border-radius: 50% ;
-  top: 0px;
+  top: 50px;
   left: calc(47% - 50px);
   
 }
 
 .login-box h1 {
-  margin: 0;
+  margin: 0px;
   padding: 0 0 20px;
   text-align: center;
   font-size: 22px;
+  margin-top:80px;
 }
 
 .login-box label {
@@ -56,7 +57,7 @@ body {
   margin-bottom: 20px;
 }
 
-.login-box input[type="text"], .login-box input[type="password"] {
+.login-box input[type="text"], .login-box input[type="password"],.login-box input[type="email"],.login-box select {
   border: none;
   border-bottom: 1px solid #fff;
   background: transparent;
