@@ -4,6 +4,11 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Categoria"%>
+<%@page import="Modelo.TipoUsuario"%>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Municipio"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -60,7 +65,7 @@
                             </a>
                         </li>
 
-                        
+
                     </ul>
                 </div>
             </div>
@@ -159,31 +164,18 @@
                                                 </th>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            1
-                                                        </td>
-                                                        <td>
-                                                            administrador
-                                                        </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            2
-                                                        </td>
-                                                        <td>
-                                                            Cliente
-                                                        </td>
-
-
-                                                    </tr>
+                                                    <%
+                                                        try {
+                                                            UsuarioDAO dao = new UsuarioDAO();
+                                                            List<TipoUsuario> LT = dao.listarTipo();
+                                                            for (TipoUsuario t : LT) {
+                                                                out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
+                                                                        + t.getId() + "</td>" + "<td>" + t.getNombre() + "</td></tr>");
+                                                            }
+                                                        } catch (Exception ex) {
+                                                            System.out.print(ex.getMessage());
+                                                        }
+                                                    %>
 
 
                                                 </tbody>
@@ -247,51 +239,18 @@
                                             </th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td>
-                                                        Hombre
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        2
-                                                    </td>
-                                                    <td>
-                                                        Mujer
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        3
-                                                    </td>
-                                                    <td>
-                                                        Niño
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        4
-                                                    </td>
-                                                    <td>
-                                                        Niña
-                                                    </td>
-                                                </tr>
+                                                <%
+                                                    try {
+                                                        UsuarioDAO dao = new UsuarioDAO();
+                                                        List<Categoria> LC = dao.ListarCategorias();
+                                                        for (Categoria c : LC) {
+                                                            out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
+                                                                    + c.getId() + "</td><td>" + c.getNombre() + "</td></tr>");
+                                                        } 
+                                                    } catch (Exception ex) {
+                                                        System.out.print(ex.getMessage());
+                                                    }
+                                                %>
                                             </tbody>
                                         </table>
                                     </div>
@@ -435,62 +394,18 @@
                                             </th>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td>
-                                                        Medéllin
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        2
-                                                    </td>
-                                                    <td>
-                                                        Envigado
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        3
-                                                    </td>
-                                                    <td>
-                                                        Sabaneta
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        4
-                                                    </td>
-                                                    <td>
-                                                        La estrella
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        5
-                                                    </td>
-                                                    <td>
-                                                        Bello
-                                                    </td>
-                                                </tr>
+                                                <%
+                                                    try {
+                                                        UsuarioDAO dao = new UsuarioDAO();
+                                                        List<Municipio> LM = dao.listarMunicipios();
+                                                        for (Municipio m : LM) {
+                                                            out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
+                                                                    + m.getId() + "</td>" + "<td>" + m.getNombre() + "</td></tr>");
+                                                        }
+                                                    } catch (Exception ex) {
+                                                        System.out.print(ex.getMessage());
+                                                    }
+                                                %>
                                             </tbody>
                                         </table>
                                     </div>

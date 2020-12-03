@@ -4,12 +4,16 @@
     Author     : mauricio
 --%>
 
+<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Municipio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <title>BEAG | Registro</title>
+        <title>BEAG | Registro</title>
         <link rel="stylesheet" href="css/Estilo_Registro.css">
     </head>
     <body>
@@ -23,12 +27,12 @@
             <form action="ControladorLogin" method="POST">
                 <div class="col-3 col-s-10" style="position: static; height: 30px;">
                     <label for="correo" class="lbl">Correo </label>
-                    <input type="text" name="txtCorreo" placeholder="ingresa el correo">
+                    <input  type="email" name="txtCorreo" placeholder="ingresa el correo" required>
                 </div>
                 <div class="col-3 col-s-10">
 
                     <label for="correo" class="lbl">Contraseña</label>
-                    <input type="password" name="txtContrasena" placeholder="ingresa contraseña">
+                    <input type="password" name="txtContrasena" placeholder="ingresa contraseña" >
                 </div >
                 <div class="col-3 col-s-10">
                     <label for="correo" class="lbl">Confirmar</label>
@@ -39,12 +43,20 @@
                     <input type="text" name="txtIdentificacion" placeholder="ingresa identificacion">
                 </div>
                 <div class="col-3 col-s-10">
-                    <label for="correo" class="lbl">Nombres</label>
-                    <input type="text" name="txtNombres" placeholder="ingresa nombres">
+                    <label for="correo" class="lbl">Primer Nombre</label>
+                    <input type="text" name="txtNombre1" placeholder="ingresa nombre">
                 </div>
                 <div class="col-3 col-s-10">
-                    <label for="correo" class="lbl">Apellidos</label>
-                    <input type="text" name="txtApellidos" placeholder="ingresa apellidos">
+                    <label for="correo" class="lbl">Segundo Nombre</label>
+                    <input type="text" name="txtNombre2" placeholder="ingresa nombre">
+                </div>
+                <div class="col-3 col-s-10">
+                    <label for="correo" class="lbl">Primer Apellido</label>
+                    <input type="text" name="txtApellido1" placeholder="ingresa apellido">
+                </div>
+                <div class="col-3 col-s-10">
+                    <label for="correo" class="lbl">Segundo Apellido</label>
+                    <input type="text" name="txtApellido2" placeholder="ingresa apellido">
                 </div>
                 <div class="col-3 col-s-10">
                     <label for="direccion" class="lbl">Dirección</label>
@@ -57,6 +69,23 @@
                 <div class="col-3 col-s-10">
                     <label for="correo" class="lbl">Telefóno</label>
                     <input type="text" name="txtTelefono" placeholder="ingresa el telefono">
+                </div>
+                <div class="col-3 col-s-10">
+                    <label for="correo" class="lbl">Municipio</label>
+                    <select name="CBMunicpio">
+                        <%
+                            try {
+                                UsuarioDAO dao = new UsuarioDAO();
+                                List<Municipio> LM = dao.listarMunicipios();
+                                for (Municipio m : LM) {
+                                    out.println("<option>" + m.getNombre() + "</option>");
+                                }
+                            } catch (Exception ex) {
+                                System.out.print(ex.getMessage());
+                            }
+                            %>
+
+                    </select>
                 </div>
                 <input type="submit" value="Crear cuenta" name="accion">
                 <a href="Inicio_Sesion.jsp">Ya tienes una cuenta</a><br>
