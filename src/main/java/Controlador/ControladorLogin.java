@@ -6,6 +6,7 @@ package Controlador;
  * and open the template in the editor.
  */
 import Modelo.*;
+import ModeloDAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -94,21 +96,32 @@ public class ControladorLogin extends HttpServlet {
                 String correo = request.getParameter("txtCorreo");
                 String contrasena = request.getParameter("txtContrasena");
                 String identificacion = request.getParameter("txtIdentificacion");
-                String nombres = request.getParameter("txtNombres");
-                String apellidos = request.getParameter("txtApellidos");
+                String nombre1 = request.getParameter("txtNombre1");
+                String nombre2 = request.getParameter("txtNombre2");
+                String apellido1 = request.getParameter("txtApellido1");
+                String apellido2 = request.getParameter("txtApellido2");
                 String direccion = request.getParameter("txtDireccion");
-                LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("txtFechaNacimiento"), DateTimeFormatter.ISO_LOCAL_DATE);
-                System.out.println(fechaNacimiento);
+                LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("txtFechaNacimiento"));
                 String telefono = request.getParameter("txtTelefono");
+                int Municipio = dao.ValidarMunicipio(request.getParameter("CBMunicpio"));
+                u.setId(dao.nuevoId());
                 u.setCorreo(correo);
                 u.setContrasena(contrasena);
                 u.setIdentificacion(identificacion);
-                u.setNombre1(nombres);
-                u.setApellido1(apellidos);
+                u.setNombre1(nombre1);
+                u.setNombre2(nombre2);
+                u.setApellido1(apellido1);
+                u.setApellido2(apellido2);
                 u.setDireccion(direccion);
                 u.setFechaNacimiento(fechaNacimiento);
                 u.setTelefono(telefono);
+                u.setMunicipio(Municipio);
+                u.setTipoUsuario(2);
+
                 dao.agregar(u);
+
+                HttpSession sesion = request.getSession();
+                sesion.setAttribute("usr", u);
                 request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
                 break;
             case "Editar":

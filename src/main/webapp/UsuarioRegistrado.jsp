@@ -4,7 +4,9 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -48,7 +50,14 @@
                         </li>
                         <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link ">Hombre</a></li>
                         <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Mujer</a></li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Juan Andres</a></li>
+                        
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">
+                            <%
+                                HttpSession sesion = request.getSession();
+                                Usuario user= (Usuario)sesion.getAttribute("usr");
+                                out.print(user.getNombre1());
+                        %>
+                            </a></li>
                         <li class="nav-menu-item"><a href="Inicio_Sesion.jsp" class="nav-menu-link">Cerrar Sesión</a></li>
                     </ul>
                 </nav>
