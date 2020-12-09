@@ -4,6 +4,7 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,10 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="javascript:void(0)">
-                                        administrador
+                                        <%
+                                    Usuario u = (Usuario) session.getAttribute("usuario");
+                                    out.println(u.getNombre1());
+                                %>
                                         <i class="material-icons">person</i>
                                         <p class="d-lg-none d-md-block">
                                             Account

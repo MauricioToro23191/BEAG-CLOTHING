@@ -12,10 +12,10 @@ package Modelo;
 public class Carrito {
     private int id;
     private int cantidad;
-    private Producto p;
-    private Usuario u;
+    private int p;
+    private int u;
 
-    public Carrito(int id, int cantidad, Producto p, Usuario u) {
+    public Carrito(int id, int cantidad, int p, int u) {
         this.id = id;
         this.cantidad = cantidad;
         this.p = p;
@@ -38,21 +38,23 @@ public class Carrito {
         this.cantidad = cantidad;
     }
 
-    public Producto getP() {
+    public int getP() {
         return p;
     }
 
-    public void setP(Producto p) {
+    public void setP(int p) {
         this.p = p;
     }
 
-    public Usuario getU() {
+    public int getU() {
         return u;
     }
 
-    public void setU(Usuario u) {
+    public void setU(int u) {
         this.u = u;
     }
+
+    
     
     
 }

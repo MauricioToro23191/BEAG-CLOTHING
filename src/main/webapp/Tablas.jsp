@@ -4,6 +4,8 @@
     Author     : mauricio
 --%>
 
+<%@page import="ModeloDAO.ProductoDAO"%>
+<%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Categoria"%>
 <%@page import="Modelo.TipoUsuario"%>
 <%@page import="java.util.List"%>
@@ -95,7 +97,10 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="javascript:void(0)">
-                                        administrador
+                                        <%
+                                    Usuario u = (Usuario) session.getAttribute("usuario");
+                                    out.println(u.getNombre1());
+                                %>
                                         <i class="material-icons">person</i>
                                         <p class="d-lg-none d-md-block">
                                             Account
@@ -165,19 +170,18 @@
                                                 </thead>
                                                 <tbody>
                                                     <%
-                                                        try {
-                                                            UsuarioDAO dao = new UsuarioDAO();
-                                                            List<TipoUsuario> LT = dao.listarTipo();
-                                                            for (TipoUsuario t : LT) {
-                                                                out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
-                                                                        + t.getId() + "</td>" + "<td>" + t.getNombre() + "</td></tr>");
-                                                            }
-                                                        } catch (Exception ex) {
-                                                            System.out.print(ex.getMessage());
+                                                         try {
+                                                        UsuarioDAO dao = new UsuarioDAO();
+                                                        List<TipoUsuario> LM = dao.listarTipo();
+                                                        for (TipoUsuario c : LM) {
+                                                            out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
+                                                                    + c.getId() + "</td>" + "<td>" + c.getNombre() + "</td></tr>");
                                                         }
+                                                    } catch (Exception ex) {
+                                                        System.out.print(ex.getMessage());
+                                                    }
                                                     %>
-
-
+                                                
                                                 </tbody>
                                             </table>
                                         </div>
@@ -187,7 +191,7 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header card-header-primary">
-                                        <h4 class="card-title">Categorìa</h4>
+                                        <h4 class="card-title">Categoría</h4>
                                     </div>
                                     <div class="card-body">
                                         <form>
@@ -222,7 +226,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-primary">
-                                    <h4 class="card-title ">Tabla Categorìas</h4>
+                                    <h4 class="card-title ">Tabla Categorías</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -240,100 +244,17 @@
                                             </thead>
                                             <tbody>
                                                 <%
-                                                    try {
-                                                        UsuarioDAO dao = new UsuarioDAO();
-                                                        List<Categoria> LC = dao.ListarCategorias();
-                                                        for (Categoria c : LC) {
+                                                     try {
+                                                        ProductoDAO dao = new ProductoDAO();
+                                                        List<Categoria> LM = dao.listarCategoria();
+                                                        for (Categoria c : LM) {
                                                             out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
-                                                                    + c.getId() + "</td><td>" + c.getNombre() + "</td></tr>");
-                                                        } 
+                                                                    + c.getId()+ "</td><td>" + c.getNombre()+ "</td></tr>");
+                                                        }
                                                     } catch (Exception ex) {
                                                         System.out.print(ex.getMessage());
                                                     }
                                                 %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title">Estado Producto</h4>
-                                </div>
-                                <div class="card-body">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">Id</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label class="bmd-label-floating">Nombre</label>
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <button type="submit" class="btn btn-primary pull-right">Guardar cambios</button>
-                                        <div class="clearfix"></div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <button type="submit" class="btn btn-primary pull-right">eliminar</button>
-                            <button type="submit" class="btn btn-primary pull-right">modificar</button>
-                            <button type="submit" class="btn btn-primary pull-right">Agregar</button>
-                        </div>
-                        <div class="col-md-12" style=" margin-top: 100px; ">
-                            <div class="card">
-                                <div class="card-header card-header-primary">
-                                    <h4 class="card-title ">Tabla Estados</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class=" text-primary">
-                                            <th style="width: 15px;">
-                                                Selecionar
-                                            </th>
-                                            <th>
-                                                ID
-                                            </th>
-                                            <th>
-                                                Nombre
-                                            </th>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        1
-                                                    </td>
-                                                    <td>
-                                                        Activo
-                                                    </td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <input type="radio">
-                                                    </td>
-                                                    <td>
-                                                        2
-                                                    </td>
-                                                    <td>
-                                                        Inactivo
-                                                    </td>
-                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -399,7 +320,7 @@
                                                         UsuarioDAO dao = new UsuarioDAO();
                                                         List<Municipio> LM = dao.listarMunicipios();
                                                         for (Municipio m : LM) {
-                                                            out.println("<tr><td><input type=\"" + "radio" + "\"></td><td>"
+                                                            out.println("<tr><td><input type=\"" + "checkbox" + "\"></td><td>"
                                                                     + m.getId() + "</td>" + "<td>" + m.getNombre() + "</td></tr>");
                                                         }
                                                     } catch (Exception ex) {

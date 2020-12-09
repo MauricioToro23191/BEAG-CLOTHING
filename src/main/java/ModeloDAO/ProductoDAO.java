@@ -5,6 +5,7 @@
  */
 package ModeloDAO;
 
+import Modelo.Categoria;
 import Modelo.Conexion;
 import Modelo.Producto;
 import Modelo.Talla;
@@ -23,14 +24,15 @@ import javax.swing.JOptionPane;
  * @author mauri
  */
 public class ProductoDAO {
+
     PreparedStatement ps;
     ResultSet rs;
     Conexion c = new Conexion();
     Connection con;
-    
+
     public List<Producto> listar() {
         List<Producto> list = new ArrayList<>();
-        String sql = "select * from usuario";
+        String sql = "select * from producto";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -42,11 +44,13 @@ public class ProductoDAO {
                 p.setFecha(rs.getDate(3).toLocalDate());
                 p.setPrecio(rs.getFloat(4));
                 p.setCantidad(rs.getInt(5));
-                p.setFoto(rs.getString(6));
-                p.setEstado(rs.getString(7));
-                p.setGenero(rs.getString(8));
-                p.setId_talla(rs.getInt(9));
-                p.setId_tipo(rs.getInt(10));
+                p.setColor(rs.getString(6));
+                p.setFoto(rs.getString(7));
+                p.setDescripcion(rs.getString(8));
+                p.setEstado(rs.getString(9));
+                p.setId_talla(rs.getInt(10));
+                p.setId_tipo(rs.getInt(11));
+                p.setId_categoria(rs.getInt(12));
                 list.add(p);
 
             }
@@ -57,36 +61,27 @@ public class ProductoDAO {
 
     }
 
-    public void agregar(Usuario u) {
+    public void agregar(Producto p) {
         String sql;
 
-        if (u.getApellido2() != null && u.getNombre2() != null) {
-            sql = "INSERT INTO USUARIO"
-                    + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
-                    + "NOMBRE1,NOMBRE2,APELLIDO1,APELLIDO2,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(5,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
-                    + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getNombre2() + "','"
-                    + u.getApellido1() + "','" + u.getApellido2() + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
+        sql = "INSERT INTO PRODUCTO"
+                + "(ID_PRODUCTO,NOMBRE,FECHA,PRECIO,CANTIDAD,COLOR,FOTO,DESCRIPCION,ID_ESTADO,ID_TALLA,ID_TIPO,ID_CATEGORIA) "
+                + "VALUES(seq_producto.nextval,'" + p.getNombre() + "',TO_DATE('2020/12/06','yyyy/mm/dd')," + p.getPrecio() + "," + p.getCantidad()
+                + ",'" + p.getColor() + "','" + p.getFoto() + "','" + p.getDescripcion() + "','" + p.getEstado() + "'," + p.getId_talla()
+                + "," + p.getId_tipo() + ","+p.getId_categoria()+")";
 
-        } else {
-            sql = "INSERT INTO USUARIO"
-                    + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
-                    + "NOMBRE1,APELLIDO1,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(5,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
-                    + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getApellido1()
-                    + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
-        }
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            ps.executeQuery();
+            //JOptionPane.showMessageDialog(null, "Insercion correcta");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }
 
-    public Producto ObtenerXId( int id) {
+    public Producto ObtenerXId(int id) {
         String sql = "SELECT * FROM PRODUCTO WHERE ID_PRODUCTO=" + id;
         Producto p = new Producto();
         try {
@@ -99,11 +94,13 @@ public class ProductoDAO {
                 p.setFecha(rs.getDate(3).toLocalDate());
                 p.setPrecio(rs.getFloat(4));
                 p.setCantidad(rs.getInt(5));
-                p.setFoto(rs.getString(6));
-                p.setEstado(rs.getString(7));
-                p.setGenero(rs.getString(8));
-                p.setId_talla(rs.getInt(9));
-                p.setId_tipo(rs.getInt(10));
+                p.setColor(rs.getString(6));
+                p.setFoto(rs.getString(7));
+                p.setDescripcion(rs.getString(8));
+                p.setEstado(rs.getString(9));
+                p.setId_talla(rs.getInt(10));
+                p.setId_tipo(rs.getInt(11));
+                p.setId_categoria(rs.getInt(12));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -111,33 +108,28 @@ public class ProductoDAO {
         return p;
     }
 
-    public int actualizar(Usuario u) {
+    public int actualizar(Producto p) {
         int r = 0;
-        String sql = "update usuario set contrasena=?, nombres=?, apellidos=?, direccion=?,telefono=?, celular=? where correo=?";
+        String sql = "update producto set NOMBRE='"+p.getNombre()+"',PRECIO="+p.getPrecio()
+                + ",CANTIDAD="+p.getCantidad()+",COLOR='"+p.getColor()+
+                "',DESCRIPCION='"+p.getDescripcion()+
+                "',ID_ESTADO='"+p.getEstado()+"',ID_TALLA="+p.getId_talla()+
+                ",ID_TIPO="+p.getId_tipo()+",ID_CATEGORIA="+p.getId_categoria()
+                +"where id_producto="+p.getId();
         try {
+            
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.setString(1, u.getContrasena());
-            ps.setString(2, u.getNombre1());
-            ps.setString(3, u.getApellido1());
-            ps.setString(4, u.getDireccion());
-            ps.setString(5, u.getTelefono());
-            ps.setString(6, u.getCelular());
-            ps.setString(7, u.getCorreo());
-            r = ps.executeUpdate();
-            if (r == 1) {
-                r = 1;
-            } else {
-                r = 0;
-            }
+            ps.executeQuery();
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return r;
     }
 
-    public void Eliminar(String correo) {
-        String sql = "delete from usuario where correo=" + correo;
+    public void Eliminar(int id) {
+        String sql = "delete from producto where id_producto=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -154,13 +146,28 @@ public class ProductoDAO {
         }
         return id + 1;
     }
+    public String nombreTalla(int id){
+         try {
+            con = c.conectar();
+            ps = con.prepareStatement("SELECT ID_TALLA, NOMBRE FROM TALLA WHERE ID_TALLA="+id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Talla t = new Talla();
+                t.setId(rs.getInt(1));
+                t.setNombre(rs.getString(2));
+                return t.getNombre();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
 
     public List<Talla> listarTalla() {
         List<Talla> list = new ArrayList<>();
-        String sql = "SELECT * FROM TALLA";
         try {
             con = c.conectar();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareStatement("SELECT ID_TALLA, NOMBRE FROM TALLA");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Talla t = new Talla();
@@ -170,11 +177,11 @@ public class ProductoDAO {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            System.out.println(ex.getMessage());
         }
         return list;
     }
-    
+
     public List<TipoProducto> listarTipo() {
         List<TipoProducto> list = new ArrayList<>();
         String sql = "SELECT * FROM TIPO_PRODUCTO;";
@@ -192,5 +199,123 @@ public class ProductoDAO {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return list;
+    }
+
+    public List<Categoria> listarCategoria() {
+        List<Categoria> list = new ArrayList<>();
+        String sql = "SELECT * FROM CATEGORIA;";
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Categoria c = new Categoria();
+                c.setId(rs.getInt(1));
+                c.setNombre(rs.getString(2));
+                list.add(c);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return list;
+    }
+
+    public int validarCategoria(String valor) {
+        switch (valor) {
+            case "Hombre":
+                return 1;
+            case "Mujer":
+                return 2;
+            case "Niño":
+                return 3;
+
+        }
+        return 3;
+    }
+     public String validarCategoria(int valor) {
+        switch (valor) {
+            case 1:
+                return "Hombre";
+            case 2:
+                return "Mujer";
+            case 3:
+                return "Niño";
+
+        }
+        return "";
+    }
+
+    public int validarTalla(String valor) {
+        switch (valor) {
+            case "XXS":
+                return 1;
+            case "XS":
+                return 2;
+            case "S":
+                return 3;
+            case "M":
+                return 4;
+            case "L":
+                return 5;
+            case "XL":
+                return 6;
+            case "XXL":
+                return 7;
+            case "XXXL":
+                return 8;
+            case "XXXXL":
+                return 9;
+        }
+        return 4;
+    }
+    public String validarTalla(int valor) {
+        switch (valor) {
+            case 1:
+                return "XXS";
+            case 2:
+                return "XS";
+            case 3:
+                return "S";
+            case 4:
+                return "M";
+            case 5:
+                return "L";
+            case 6:
+                return "XL";
+            case 7:
+                return "XXL";
+            case 8:
+                return "XXXL";
+            case 9:
+                return "XXXXL";
+        }
+        return "";
+    }
+
+    public int validarTipo(String valor) {
+        switch (valor) {
+            case "Camiseta":
+                return 1;
+            case "Buso":
+                return 2;
+            case "Sudadera":
+                return 3;
+            case "Gorra":
+                return 4;
+        }
+        return 1;
+    }
+    public String validarTipo(int valor) {
+        switch (valor) {
+            case 1:
+                return "Camiseta";
+            case 2:
+                return "Buso";
+            case 3:
+                return "Sudadera";
+            case 4:
+                return "Gorra";
+        }
+        return "";
     }
 }

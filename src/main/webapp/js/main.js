@@ -1,11 +1,20 @@
 
+/* global documet */
+
 // script del menu responsive Abrir el menu
 var btnMobile = document.getElementById('btn-mobile')
-btnMobile.addEventListener('click', function (e) {
+btnMobile.addEventListener('click',activarmodal )
+
+function activarmodal(e) {
     e.preventDefault()
     let mySidenav = document.getElementById("mySidenav")
     mySidenav.classList.toggle("openOffCanvas")
-})
+}
+var act=documet.getElementById("act");
+
+    if(act.value==="inline"){
+        activarmodal();
+    }
 
 // script del menu responsive sticky menu
 

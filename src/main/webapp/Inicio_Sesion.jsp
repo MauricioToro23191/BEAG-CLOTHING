@@ -20,15 +20,14 @@
             </div>
 
             <h1>Iniciar sesión</h1>
-            <form method="POST" action="">
-                <!-- USERNAME INPUT -->
+            <form action="ControladorLogin" method="POST">
+                <!-- NOMBRE USUARIO INPUT -->
                 <label for="correo">Correo Electronico</label>
-                <input type="text" placeholder="ingresa el correo electrónico">
-                <!-- PASSWORD INPUT -->
+                <input type="text" name="txtCorreo" placeholder="ingresa el correo electrónico">
+                <!-- CONTRASEÑA INPUT -->
                 <label for="contrasena">Contraseña</label>
-                <input type="password" placeholder="Ingresa la contraseña">
-                <a href="UsuarioRegistrado.jsp"><input class="boton" type="button" value="Iniciar"></a>
-                <a href="#">¿Olvidaste tu contraseña?</a><br>
+                <input type="password" name="txtContrasena" placeholder="Ingresa la contraseña">
+                <input class="boton" type="submit" name="accion" value="Iniciar Sesion">
                 <a href="Registro.jsp">¿Aún no tienes una cuenta?</a><br>
                 <a href="index.jsp">Volver a inicio</a>
             </form>

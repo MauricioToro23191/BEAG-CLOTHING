@@ -4,6 +4,11 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Producto"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Talla"%>
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.ProductoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +40,7 @@
                     </a></div>
                 <div class="sidebar-wrapper">
                     <ul class="nav">
-                         <li class="nav-item active">
+                        <li class="nav-item active">
                             <a class="nav-link" href="./Productos.jsp">
                                 <i class="material-icons">style</i>
                                 <p>Productos</p>
@@ -47,7 +52,7 @@
                                 <p>Usuarios</p>
                             </a>
                         </li>
-                       
+
                         <li class="nav-item ">
                             <a class="nav-link" href="Pedidos_Admin.jsp">
                                 <i class="material-icons">content_paste</i>
@@ -90,7 +95,10 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="javascript:void(0)">
-                                        administrador
+                                        <%
+                                            Usuario u = (Usuario) session.getAttribute("usuario");
+                                            out.println(u.getNombre1());
+                                        %>
                                         <i class="material-icons">person</i>
                                     </a>
                                 </li>
@@ -108,288 +116,188 @@
                                         <h4 class="card-title">Editar Producto</h4>
                                     </div>
                                     <div class="card-body">
-                                        <form>
-                                            <div class="row">
+                                        <form  name="formulario" action="ControladorProducto" method="post" >
 
+                                            <div class="row">
                                                 <div class="col-md-4">
-                                                    <div >
+                                                    <div>
                                                         <label class="bmd-label-floating">Agregar imagen del producto</label>
                                                     </div>
-                                                    <input type="file" class="form-control" name="adjunto" accept=".jpeg,.jpg,.png"  />
-
+                                                    <input type="file" class="form-control" id="archivo" value="${prod.getFoto()}" name="file" accept=".jpeg,.jpg,.png"  />
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Nombre</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" name="txtNombre" value="${prod.getNombre()}" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label class="bmd-label-floating">Talla</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Color</label>
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" name="txtColor" value="${prod.getColor()}" class="form-control">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Cantidad</label>
-                                                        <input type="number" class="form-control">
+                                                        <input type="text" name="txtCantidad" value="${prod.getCantidad()}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label class="bmd-label-floating">Precio</label>
-                                                        <input type="number" class="form-control">
+                                                        <input type="text" name="txtPrecio" value="${prod.getPrecio()}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group" >
+                                                        <label class="bmd-label-floating">categoría</label>
+                                                        <select class="form-control" name="SelectCategoria" >
+                                                            <option style="color: #000;">Hombre </option>  
+                                                            <option style="color: #000;">Mujer</option> 
+                                                            <option style="color: #000;">Niño</option>
+                                                            <option style="color: #000;">Niña</option> 
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="bmd-label-floating">categoría</label>
-                                                        <select class="form-control"">
-                                                            <option style="color: #000;">Hombre </option>  
-                                                            <option style=" color: #000;">Mujer</option> 
-                                                            <option style=" color: #000;">Niño</option>
-                                                            <option style=" color: #000;">Niña</option> 
+                                                        <label class="bmd-label-floating">Estado</label>
+                                                        <select class="form-control" name="SelectEstado" value="">
+                                                            <option style="color: #000;">1</option>  
+                                                            <option style=" color: #000;">2</option> 
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label class="bmd-label-floating">Estado</label>
-                                                        <select class="form-control"">
-                                                            <option style="color: #000;">activo </option>  
-                                                            <option style=" color: #000;">inactivo</option> 
-                                                            <option style=" color: #000;">Niña</option> 
+                                                        <label class="bmd-label-floating">Tipo</label>
+                                                        <select class="form-control" name="SelectTipo" value="">
+                                                            <option style="color: #000;">Camiseta </option>  
+                                                            <option style=" color: #000;">Buso</option> 
+                                                            <option style=" color: #000;">Sudadera</option>
+                                                            <option style=" color: #000;">Gorra</option> 
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary pull-right" style=" height: 40px; float:">Guardar cambios</button>
-
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="bmd-label-floating">Talla</label>
+                                                        <select name="SelectTalla" class="form-control">
+                                                            <option style="color: #000;">XXS</option>  
+                                                            <option style="color: #000;">XS</option>  
+                                                            <option style="color: #000;">S</option> 
+                                                            <option style="color: #000;">M</option>
+                                                            <option style="color: #000;">L</option>  
+                                                            <option style="color: #000;">XL</option> 
+                                                            <option style="color: #000;">XXL</option>
+                                                            <option style="color: #000;">XXXL</option>
+                                                            <option style="color: #000;">XXXXL</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="bmd-label-floating">Descripción</label>
+                                                        <input type="text" name="txtDescripcion" value="${prod.getDescripcion()}" class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <input type="hidden" name="id" value="${prod.getId()}">       
+                                            <button type="submit" class="btn btn-primary pull-right"  value="${value}CrearProducto" name="accion" style=" height: 40px; float:">Guardar cambios</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header card-header-primary">
-                                <h4 class="card-title ">Productos</h4>
-                                <p class="card-category">Lista de productos</p>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Productos</h4>
+                            <p class="card-category">Lista de productos</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>
+                                        Foto
+                                    </th>
+                                    <th>
+                                        Id
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Color
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        Categoria
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            ProductoDAO dao = new ProductoDAO();
+                                            List<Producto> LP = dao.listar();
+                                            String path = "img/catalogo/";
+                                            for (Producto p : LP) {
+
+                                                String html
+                                                        = "<tr>"
+                                                        + "<td>"
+                                                        + "<img src=\"" + path + p.getFoto() + "\" width=\"150\" height=\"180\" />"
+                                                        + "</td>"
+                                                        + "<td>" + p.getId() + "</td>"
+                                                        + "<td>" + p.getNombre() + "</td>"
+                                                        + "<td>" + p.getColor() + "</td>"
+                                                        + "<td>" + p.getCantidad() + "</td>"
+                                                        + "<td class=\"text-primary\">" + p.getPrecio() + "</td>"
+                                                        + "<td>" + p.getId_categoria() + "</td>"
+                                                        + "<td>" + p.getEstado() + "</td>"
+                                                        + "<td><form action=\"ControladorProducto\" method=\"POST\">"
+                                                        + "<input type=\"hidden\" value=\"" + p.getId() + "\" name=\"id\">"
+                                                        + "<input type=\"submit\" value=\"Editar\" name=\"accion\"/>"
+                                                        + "<input type=\"submit\" value=\"Eliminar\" name=\"accion\" />"
+                                                        + "</form></td>"
+                                                        + "</tr>";
+                                                out.println(html);
+
+                                            }%>
+
+                                    </tbody>
+
+
+
+                                </table>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead class=" text-primary">
-                                        <th>
-                                            Seleccionar
-                                        </th>
-                                        <th>
-                                            Foto
-                                        </th>
-                                        <th>
-                                            Id
-                                        </th>
-                                        <th>
-                                            Nombre
-                                        </th>
-                                        <th>
-                                            Color
-                                        </th>
-                                        <th>
-                                            Cantidad
-                                        </th>
-                                        <th>
-                                            Precio
-                                        </th>
-                                        <th>
-                                            Categoria
-                                        </th>
-                                        <th>
-                                            Estado
-                                        </th>
 
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio">
-                                                </td>
-
-                                                <td> 
-                                                    <img src="img/gorra.jpeg" width="150" height="180s" alt="gorra"/>
-                                                </td>
-
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
-
-                                                    Gorra
-                                                </td>
-                                                <td>
-                                                    Blanca
-                                                </td>
-                                                <td>
-                                                    100
-                                                </td>
-                                                <td class="text-primary">
-                                                    $36,738
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style="color: #000;">Hombre </option>  
-                                                        <option style=" color: #000;">Mujer</option> 
-                                                        <option style=" color: #000;">Niño</option>
-                                                        <option style=" color: #000;">Niña</option> 
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control">
-                                                        <option style="color: #000;">activo </option>  
-                                                        <option style=" color: #000;">inactivo</option> 
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio">
-                                                </td>
-
-                                                <td> 
-                                                    <img src="img/buso.jpeg" width="150" height="180s" alt="gorra"/>
-                                                </td>
-
-                                                <td>
-                                                    2
-                                                </td>
-                                                <td>
-                                                    Buso
-                                                </td>
-                                                <td>
-                                                    Naranja
-                                                </td>
-                                                <td>
-                                                    200
-                                                </td>
-                                                <td class="text-primary">
-                                                    $66,738
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style=" color: #000;">Mujer</option>
-                                                        <option style=" color: #000;">Niña</option> 
-                                                        <option style=" color: #000;">Niño</option>
-                                                        <option style="color: #000;">Hombre </option> 
-
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style="color: #000;">activo </option>  
-                                                        <option style=" color: #000;">inactivo</option> 
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio">
-                                                </td>
-
-                                                <td> 
-                                                    <img src="img/buso3.jpg" width="150" height="180s" alt="gorra"/>
-                                                </td>
-
-                                                <td>
-                                                    3
-                                                </td>
-                                                <td>
-                                                    buso    
-                                                </td>
-                                                <td>
-                                                    marron
-                                                </td>
-                                                <td>
-                                                    50
-                                                </td>
-                                                <td class="text-primary">
-                                                    $59,738
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style="color: #000;">Hombre </option>  
-                                                        <option style=" color: #000;">Mujer</option> 
-                                                        <option style=" color: #000;">Niño</option>
-                                                        <option style=" color: #000;">Niña</option> 
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style="color: #000;">activo </option>  
-                                                        <option style=" color: #000;">inactivo</option> 
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <input type="radio">
-                                                </td>
-
-                                                <td> 
-                                                    <img src="img/busoG.jpg" width="150" height="180s" alt="gorra"/>
-                                                </td>
-
-                                                <td>
-                                                    4
-                                                </td>
-                                                <td>
-                                                    buso
-                                                </td>
-                                                <td>
-                                                    Negro
-                                                </td>
-                                                <td>
-                                                    600
-                                                </td>
-                                                <td class="text-primary">
-                                                    $86,738
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style=" color: #000;">Mujer</option> 
-                                                        <option style="color: #000;">Hombre </option>  
-                                                        <option style=" color: #000;">Niño</option>
-                                                        <option style=" color: #000;">Niña</option> 
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="form-control"">
-                                                        <option style="color: #000;">activo </option>  
-                                                        <option style=" color: #000;">inactivo</option> 
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

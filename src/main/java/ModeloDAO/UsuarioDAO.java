@@ -17,7 +17,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -36,6 +35,7 @@ public class UsuarioDAO {
         List<Usuario> list = new ArrayList<>();
         String sql = "select * from usuario";
         try {
+
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -48,7 +48,7 @@ public class UsuarioDAO {
                 u.setApellido1(rs.getString(5));
                 u.setApellido2(rs.getString(6));
                 u.setCorreo(rs.getString(7));
-                u.setContrasena(rs.getString(8));
+                //u.setContrasena(rs.getString(8));
                 u.setFechaNacimiento(rs.getDate(9).toLocalDate());
                 u.setDireccion(rs.getString(10));
                 u.setTelefono(rs.getString(11));
@@ -68,36 +68,86 @@ public class UsuarioDAO {
     public void agregar(Usuario u) {
         String sql;
 
-        if (u.getApellido2() != null && u.getNombre2() != null) {
+        if (u.getApellido2() != "" && u.getNombre2() != "") {
             sql = "INSERT INTO USUARIO"
                     + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
                     + "NOMBRE1,NOMBRE2,APELLIDO1,APELLIDO2,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(6,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
                     + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getNombre2() + "','"
                     + u.getApellido1() + "','" + u.getApellido2() + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
 
-        } else {
+        } else if(u.getApellido2() == "" && u.getNombre2() != ""){
+            sql = "INSERT INTO USUARIO"
+                    + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
+                    + "NOMBRE1,NOMBRE2,APELLIDO1,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getNombre2() + "','"
+                    + u.getApellido1()  + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
+        
+        }else if(u.getApellido2() != "" && u.getNombre2() == ""){
+            sql = "INSERT INTO USUARIO"
+                    + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
+                    + "NOMBRE1,APELLIDO1,APELLIDO2,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1()  + "','"
+                    + u.getApellido1() + "','" + u.getApellido2() + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
+                
+        }
+        else {
             sql = "INSERT INTO USUARIO"
                     + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
                     + "NOMBRE1,APELLIDO1,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(6,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
                     + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getApellido1()
                     + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
         }
+
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
+            ps.executeQuery();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
     }
 
-    public Usuario listarId(String correo) {
-        String sql = "select * from usuario where correo=" + correo;
+    public Usuario ObtenerUsuario(String Correo, String contrasena) {
+        Usuario u = null;
+        String sql = "SELECT * FROM USUARIO WHERE CORREO='" + Correo + "' AND CONTRASENA='" + contrasena + "'";
+
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                u = new Usuario();
+                u.setId(rs.getInt(1));
+                u.setIdentificacion(rs.getString(2));
+                u.setNombre1(rs.getString(3));
+                u.setNombre2(rs.getString(4));
+                u.setApellido1(rs.getString(5));
+                u.setApellido2(rs.getString(6));
+                u.setCorreo(rs.getString(7));
+                u.setFechaNacimiento(rs.getDate(9).toLocalDate());
+                u.setDireccion(rs.getString(10));
+                u.setTelefono(rs.getString(11));
+                u.setCelular(rs.getString(12));
+                u.setTipoUsuario(rs.getInt(13));
+                u.setMunicipio(rs.getInt(14));
+            }
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return u;
+    }
+
+    public Usuario ObtenerID(Usuario user) {
+        String sql = "SELECT * FROM USUARIO WHERE ID_USUARIO='" + user.getId() + "';";
         Usuario u = new Usuario();
         try {
+
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -117,7 +167,7 @@ public class UsuarioDAO {
                 u.setTipoUsuario(rs.getInt(13));
                 u.setTipoUsuario(rs.getInt(14));
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
 
         }
         return u;
@@ -125,7 +175,8 @@ public class UsuarioDAO {
 
     public int actualizar(Usuario u) {
         int r = 0;
-        String sql = "update usuario set contrasena=?, nombres=?, apellidos=?, direccion=?,telefono=?, celular=? where correo=?";
+        String sql = "update usuario set contrasena=?, nombre1=?, nombre2=?, "
+                + "apellido1=?,apellido2=?, direccion=?,telefono=?, celular=? where ID_USUARIO=?";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -142,7 +193,7 @@ public class UsuarioDAO {
             } else {
                 r = 0;
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
 
         }
         return r;
@@ -154,17 +205,8 @@ public class UsuarioDAO {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
-    }
-
-    public int nuevoId() {
-        int id = 1;
-        List<Usuario> user = listar();
-        for (Usuario u : user) {
-            id = u.getId();
-        }
-        return id + 1;
     }
 
     public List<Municipio> listarMunicipios() {
@@ -181,12 +223,12 @@ public class UsuarioDAO {
                 list.add(m);
 
             }
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
 
         }
         return list;
     }
-    
+
     public List<TipoUsuario> listarTipo() {
         List<TipoUsuario> list = new ArrayList<>();
         String sql = "SELECT * FROM TIPO_USUARIO;";
@@ -205,16 +247,7 @@ public class UsuarioDAO {
         return list;
     }
 
-    public int ValidarMunicipio(String muni) {
-        List<Municipio> LM = listarMunicipios();
-        for (Municipio m : LM) {
-            if (muni == m.getNombre()) {
-                return m.getId();
-            }
-        }
-        return 0;
-    }
-    public List<Categoria> ListarCategorias(){
+    public List<Categoria> ListarCategorias() {
         List<Categoria> list = new ArrayList<>();
         String sql = "SELECT * FROM CATEGORIA;";
         try {
@@ -232,5 +265,7 @@ public class UsuarioDAO {
         }
         return list;
     }
+
+  
 
 }

@@ -20,16 +20,17 @@ public class Producto {
     String color;
     String Foto;
     String estado;
-    String Genero;
+    String descripcion;
     int id_talla;
     int id_tipo; 
+    int id_categoria;
 
     
     public Producto(){
         
     }
-    
-    public Producto(int id, String Nombre, LocalDate fecha, float precio, int cantidad, String color, String Foto, String estado, String Genero, int id_talla, int id_tipo) {
+
+    public Producto(int id, String Nombre, LocalDate fecha, float precio, int cantidad, String color, String Foto, String estado, String descripcion, int id_talla, int id_tipo, int id_categoria) {
         this.id = id;
         this.Nombre = Nombre;
         this.fecha = fecha;
@@ -38,9 +39,10 @@ public class Producto {
         this.color = color;
         this.Foto = Foto;
         this.estado = estado;
-        this.Genero = Genero;
+        this.descripcion = descripcion;
         this.id_talla = id_talla;
         this.id_tipo = id_tipo;
+        this.id_categoria = id_categoria;
     }
 
     public int getId() {
@@ -107,13 +109,14 @@ public class Producto {
         this.estado = estado;
     }
 
-    public String getGenero() {
-        return Genero;
+    public int getId_categoria() {
+        return id_categoria;
     }
 
-    public void setGenero(String Genero) {
-        this.Genero = Genero;
+    public void setId_categoria(int id_categoria) {
+        this.id_categoria = id_categoria;
     }
+
 
     public int getId_talla() {
         return id_talla;
@@ -130,7 +133,19 @@ public class Producto {
     public void setId_tipo(int id_tipo) {
         this.id_tipo = id_tipo;
     }
-    
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" + "id=" + id + ", Nombre=" + Nombre + ", fecha=" + fecha + ", precio=" + precio + ", cantidad=" + cantidad + ", color=" + color + ", Foto=" + Foto + ", estado=" + estado + ", descripcion=" + descripcion + ", id_talla=" + id_talla + ", id_tipo=" + id_tipo + ", id_categoria=" + id_categoria + '}';
+    }
     
     
 }

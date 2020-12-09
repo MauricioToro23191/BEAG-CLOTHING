@@ -4,6 +4,8 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Producto"%>
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,12 +47,29 @@
                         <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
                         </li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link ">Hombre</a></li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Mujer</a></li>
-                        <li class="nav-menu-item"><a href="Usuarios.jsp" class="nav-menu-link">Administrador</a></li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Juan Andres</a></li>
-                        <li class="nav-menu-item"><a href="Inicio_Sesion.jsp" class="nav-menu-link">Cerrar Sesión</a></li>
+                                                    <%
+                                try {
+                                    Usuario u = (Usuario) session.getAttribute("usuario");
+                                    if (u.getTipoUsuario() == 1) {
+                                        out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
+                                    }
+                                } catch (Exception ex) {
 
+                                }
+                            %>
+
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link"> 
+                                <%
+                                    try {
+                                        Usuario u = (Usuario) session.getAttribute("usuario");
+                                        out.println(u.getNombre1());
+                                    } catch (Exception ex) {
+
+                                    }
+                                %>
+
+                            </a></li>
+                        <li class="nav-menu-item"><a href="Inicio_Sesion.jsp" class="nav-menu-link">Cerrar Sesión</a></li>
                     </ul>
                 </nav>
             </nav>
@@ -118,6 +137,20 @@
                                 <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
                                 <td style="vertical-align:middle;">$40.000</td>
                             </tr>
+                            
+                            <%
+                                Producto p=(Producto)request.getAttribute("prod");
+                                int Cantidad=Integer.parseInt(request.getParameter("cantidad"));
+                                
+                                String html="<tr><td><input class=\"eliminar\" type=\"submit\" value=\"X\" />"+
+                                    "<img style=\"width: 100px\" src=\"img/catalogo/"+p.getFoto()+"\"/>"
+                                    +"</td><td style=\"vertical-align:middle;\"> "+p.getNombre()+"</td>"
+                                +"<td style=\"vertical-align:middle;\">$"+p.getPrecio()+"</td>"
+                                +"<td style=\"vertical-align:middle;\"><input type=\"number\" value=\""+Cantidad+"\" /></td>"
+                                +"<td style=\"vertical-align:middle;\">$"+(Cantidad*p.getPrecio())+"</td>";
+                                out.println(html);
+                            
+                            %>
                         </tbody>
                     </table>
                     <hr>

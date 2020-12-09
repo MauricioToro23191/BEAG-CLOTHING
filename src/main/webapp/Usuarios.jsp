@@ -4,6 +4,9 @@
     Author     : mauricio
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -89,7 +92,10 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="javascript:void(0)">
-                                        administrador
+                                        <%
+                                            Usuario u = (Usuario) session.getAttribute("usuario");
+                                            out.println(u.getNombre1());
+                                        %>
                                         <i class="material-icons">person</i>
                                         <p class="d-lg-none d-md-block">
                                             Account
@@ -244,212 +250,52 @@
                                                 </th>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            285938185
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
+                                                    <%
+                                                        List<Usuario> LU = new UsuarioDAO().listar();
+                                                        for (Usuario user : LU) {
+                                                            String datos
+                                                                    = "<tr><td><input name=\"" + user.getId() + "\" type=\"" + "button" + "\" value=\"" + "editar" + "\"></td>"
+                                                                    + "<td>" + user.getIdentificacion() + "</td>"
+                                                                    + "<td>" + user.getNombre1();
+                                                            if (user.getNombre2() != null) {
+                                                                datos = datos + " " + user.getNombre2();
+                                                            }
+                                                            datos += "</td>"
+                                                                    + "<td>" + user.getApellido1();
+                                                            if (user.getApellido2() != null) {
+                                                                datos += " " + user.getApellido2();
+                                                            }
+                                                            datos += "</td>"
+                                                                    + "<td>" + user.getCorreo() + "</td>"
+                                                                    + "<td>" + user.getTelefono() + "</td>"
+                                                                    + "<td>";
+                                                            if (user.getCelular() != null) {
+                                                                datos += user.getCelular();
+                                                            }
+                                                            datos += " </td>"
+                                                                    + "<td>" + user.getDireccion() + "</td>";
+                                                            if (user.getTipoUsuario() == 1) {
+                                                                datos += "<td><select class=\"form-control\">"
+                                                                        + "<option style=\"\"color: #000;\"\"> Administrador </option>"
+                                                                        + "<option style=\"color: #000;\"\"> Cliente </option> "
+                                                                        + "</select>";
+                                                            } else if (user.getTipoUsuario() == 2) {
+                                                                datos += "<td><select class=\"form-control\">"
+                                                                        + "<option style=\"\"color: #000;\"\"> Cliente </option>"
+                                                                        + "<option style=\"color: #000;\"\"> Administrador  </option> "
+                                                                        + "</select>";
+                                                            }
 
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            670734304
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
+                                                            out.println(datos + "</td><tr>");
 
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            357925632
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
-
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            1208521468
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
-
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            620843973
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
-
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input type="radio">
-                                                        </td>
-                                                        <td>
-                                                            204136006
-                                                        </td>
-                                                        <td>
-                                                            Dakota Rice
-                                                        </td>
-                                                        <td>
-                                                            Niger
-                                                        </td>
-                                                        <td>
-                                                            example@gmail.com
-                                                        </td>
-                                                        <td>
-                                                            2791564
-                                                        </td>
-                                                        <td>
-                                                            3215468980
-                                                        </td>
-                                                        <td>
-                                                            cra 50# 70-70
-                                                        </td>
-
-                                                        <td>
-                                                            <select class="form-control" >
-                                                                <option style="color: #000;">Cliente </option>  
-                                                                <option style="color: #000;">Administrador </option>   
-                                                            </select>
-                                                        </td>
-                                                    </tr>.
-
+                                                        }
+                                                    %>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
