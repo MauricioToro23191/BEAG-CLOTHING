@@ -15,11 +15,8 @@ public class Carrito {
     private int p;
     private int u;
 
-    public Carrito(int id, int cantidad, int p, int u) {
-        this.id = id;
-        this.cantidad = cantidad;
-        this.p = p;
-        this.u = u;
+    public Carrito() {
+        
     }
 
     public int getId() {
@@ -49,12 +46,9 @@ public class Carrito {
     public int getU() {
         return u;
     }
-
+   
     public void setU(int u) {
         this.u = u;
     }
 
-    
-    
-    
 }

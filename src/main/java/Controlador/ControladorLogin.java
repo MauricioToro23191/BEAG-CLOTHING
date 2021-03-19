@@ -113,12 +113,10 @@ public class ControladorLogin extends HttpServlet {
                 u.setMunicipio(4);
                 u.setTipoUsuario(2);
                 dao.agregar(u);
-                
-                
-                   session=request.getSession();
-                   session.setAttribute("usuario", u);
-                
-                
+                              
+                session=request.getSession();
+                session.setAttribute("usuario", u);
+                               
                 request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
                 break;
             case "Editar":

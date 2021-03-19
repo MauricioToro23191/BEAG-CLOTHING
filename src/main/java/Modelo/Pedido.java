@@ -17,17 +17,13 @@ public class Pedido {
     float costoEnvio;
     LocalDate fechaPedido;
     LocalDate FechaEntrega;
-    EstadoPedido estado;
-    Usuario u;
+    String estado;
+    int u;
 
-    public Pedido(int id, float Total, float costoEnvio, LocalDate fechaPedido, LocalDate FechaEntrega, EstadoPedido estado, Usuario u) {
-        this.id = id;
-        this.Total = Total;
-        this.costoEnvio = costoEnvio;
-        this.fechaPedido = fechaPedido;
-        this.FechaEntrega = FechaEntrega;
-        this.estado = estado;
-        this.u = u;
+   
+
+    public Pedido() {
+
     }
 
     public int getId() {
@@ -70,21 +66,23 @@ public class Pedido {
         this.FechaEntrega = FechaEntrega;
     }
 
-    public EstadoPedido getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoPedido   estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public Usuario getU() {
+    public int getU() {
         return u;
     }
 
-    public void setU(Usuario u) {
+    public void setU(int u) {
         this.u = u;
     }
+
+   
     
     
     

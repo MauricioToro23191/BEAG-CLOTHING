@@ -10,7 +10,6 @@ import Modelo.Conexion;
 import Modelo.Producto;
 import Modelo.Talla;
 import Modelo.TipoProducto;
-import Modelo.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +31,7 @@ public class ProductoDAO {
 
     public List<Producto> listar() {
         List<Producto> list = new ArrayList<>();
-        String sql = "select * from producto";
+        String sql = "select * from producto order by(id_producto)";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
@@ -54,6 +53,7 @@ public class ProductoDAO {
                 list.add(p);
 
             }
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -66,7 +66,7 @@ public class ProductoDAO {
 
         sql = "INSERT INTO PRODUCTO"
                 + "(ID_PRODUCTO,NOMBRE,FECHA,PRECIO,CANTIDAD,COLOR,FOTO,DESCRIPCION,ID_ESTADO,ID_TALLA,ID_TIPO,ID_CATEGORIA) "
-                + "VALUES(seq_producto.nextval,'" + p.getNombre() + "',TO_DATE('2020/12/06','yyyy/mm/dd')," + p.getPrecio() + "," + p.getCantidad()
+                + "VALUES(SEQ_PRODUCTO.nextval,'" + p.getNombre() + "',TO_DATE('2020/12/06','yyyy/mm/dd')," + p.getPrecio() + "," + p.getCantidad()
                 + ",'" + p.getColor() + "','" + p.getFoto() + "','" + p.getDescripcion() + "','" + p.getEstado() + "'," + p.getId_talla()
                 + "," + p.getId_tipo() + ","+p.getId_categoria()+")";
 
@@ -74,6 +74,7 @@ public class ProductoDAO {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             ps.executeQuery();
+            con.close();
             //JOptionPane.showMessageDialog(null, "Insercion correcta");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -102,6 +103,7 @@ public class ProductoDAO {
                 p.setId_tipo(rs.getInt(11));
                 p.setId_categoria(rs.getInt(12));
             }
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -121,7 +123,7 @@ public class ProductoDAO {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             ps.executeQuery();
-            
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -157,6 +159,7 @@ public class ProductoDAO {
                 t.setNombre(rs.getString(2));
                 return t.getNombre();
             }
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -176,6 +179,7 @@ public class ProductoDAO {
                 list.add(t);
 
             }
+            con.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -195,6 +199,7 @@ public class ProductoDAO {
                 t.setNombre(rs.getString(2));
                 list.add(t);
             }
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -214,6 +219,7 @@ public class ProductoDAO {
                 c.setNombre(rs.getString(2));
                 list.add(c);
             }
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }

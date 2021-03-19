@@ -1,10 +1,5 @@
 package ModeloDAO;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import Modelo.Categoria;
 import Modelo.Conexion;
 import Modelo.Municipio;
@@ -58,6 +53,7 @@ public class UsuarioDAO {
                 list.add(u);
 
             }
+             con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -68,27 +64,27 @@ public class UsuarioDAO {
     public void agregar(Usuario u) {
         String sql;
 
-        if (u.getApellido2() != "" && u.getNombre2() != "") {
+        if (!"".equals(u.getApellido2()) && !"".equals(u.getNombre2())) {
             sql = "INSERT INTO USUARIO"
                     + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
                     + "NOMBRE1,NOMBRE2,APELLIDO1,APELLIDO2,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + "',TO_DATE('" + u.getFechaNacimiento().toString()
                     + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getNombre2() + "','"
                     + u.getApellido1() + "','" + u.getApellido2() + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
 
-        } else if(u.getApellido2() == "" && u.getNombre2() != ""){
+        } else if("".equals(u.getApellido2()) && !"".equals(u.getNombre2())){
             sql = "INSERT INTO USUARIO"
                     + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
                     + "NOMBRE1,NOMBRE2,APELLIDO1,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + "',TO_DATE('" + u.getFechaNacimiento().toString()
                     + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1() + "','" + u.getNombre2() + "','"
                     + u.getApellido1()  + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
         
-        }else if(u.getApellido2() != "" && u.getNombre2() == ""){
+        }else if(!"".equals(u.getApellido2()) && "".equals(u.getNombre2())){
             sql = "INSERT INTO USUARIO"
                     + "(ID_USUARIO,CORREO,CONTRASENA,FECHA_NACIMIENTO,IDENTIFICACION,"
                     + "NOMBRE1,APELLIDO1,APELLIDO2,DIRECCION,TELEFONO, MUNICIPIO,TIPO_USUAIRO) "
-                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + " ',TO_DATE('" + u.getFechaNacimiento().toString()
+                    + "VALUES(seq_Usuario.nextval,'" + u.getCorreo() + "','" + u.getContrasena() + "',TO_DATE('" + u.getFechaNacimiento().toString()
                     + " ','yyyy-mm-dd'),'" + u.getIdentificacion() + "','" + u.getNombre1()  + "','"
                     + u.getApellido1() + "','" + u.getApellido2() + "','" + u.getDireccion() + "','" + u.getTelefono() + "',1,2)";
                 
@@ -105,7 +101,8 @@ public class UsuarioDAO {
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.executeQuery();
+            ps.executeUpdate();
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -136,6 +133,7 @@ public class UsuarioDAO {
                 u.setTipoUsuario(rs.getInt(13));
                 u.setMunicipio(rs.getInt(14));
             }
+             con.close();
         } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -144,7 +142,7 @@ public class UsuarioDAO {
     }
 
     public Usuario ObtenerID(Usuario user) {
-        String sql = "SELECT * FROM USUARIO WHERE ID_USUARIO='" + user.getId() + "';";
+        String sql = "SELECT * FROM USUARIO WHERE ID_USUARIO=" + user.getId();
         Usuario u = new Usuario();
         try {
 
@@ -167,46 +165,53 @@ public class UsuarioDAO {
                 u.setTipoUsuario(rs.getInt(13));
                 u.setTipoUsuario(rs.getInt(14));
             }
+             con.close();
         } catch (SQLException ex) {
 
         }
         return u;
     }
 
-    public int actualizar(Usuario u) {
-        int r = 0;
-        String sql = "update usuario set contrasena=?, nombre1=?, nombre2=?, "
-                + "apellido1=?,apellido2=?, direccion=?,telefono=?, celular=? where ID_USUARIO=?";
+    public boolean actualizar(Usuario u) {
+        
+        String sql = "UPDATE USUARIO SET "
+                + "CORREO='"+u.getCorreo()+"', "
+                + "IDENTIFICACION='"+u.getIdentificacion()+"', "
+                + "DIRECCION='"+u.getDireccion()+"',"
+                + "NOMBRE1='"+u.getNombre1()+"', "
+                + "NOMBRE2='"+u.getNombre2()+"', "
+                + "APELLIDO1='"+u.getApellido1()+"', "
+                + "APELLIDO2='"+u.getApellido2()+"', "
+                + "TELEFONO='"+u.getTelefono()+"', "
+                + "CELULAR='"+u.getCelular()+"' "
+                + "WHERE ID_USUARIO="+u.getId();
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.setString(1, u.getContrasena());
-            ps.setString(2, u.getNombre1());
-            ps.setString(3, u.getApellido1());
-            ps.setString(4, u.getDireccion());
-            ps.setString(5, u.getTelefono());
-            ps.setString(6, u.getCelular());
-            ps.setString(7, u.getCorreo());
-            r = ps.executeUpdate();
-            if (r == 1) {
-                r = 1;
-            } else {
-                r = 0;
-            }
+            ps.executeQuery();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Se actualizaron datos de usuario");
+            return true;
         } catch (SQLException ex) {
-
+            JOptionPane.showMessageDialog(null, "Error al actualizar datos de usuario");
         }
-        return r;
+       
+        return false;
     }
 
-    public void Eliminar(String correo) {
-        String sql = "delete from usuario where correo=" + correo;
+    public boolean Eliminar(int id)  {
+        String sql = "delete from usuario where id_usuario=" + id;
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
-            ps.executeUpdate();
+            ps.executeQuery();
+            con.close();
+            return true;
+             
         } catch (SQLException e) {
         }
+        
+        return false;
     }
 
     public List<Municipio> listarMunicipios() {
@@ -223,9 +228,11 @@ public class UsuarioDAO {
                 list.add(m);
 
             }
+            con.close();
         } catch (SQLException ex) {
 
         }
+        
         return list;
     }
 
@@ -242,6 +249,7 @@ public class UsuarioDAO {
                 t.setNombre(rs.getString(2));
                 list.add(t);
             }
+            con.close();
         } catch (SQLException ex) {
         }
         return list;
@@ -251,19 +259,38 @@ public class UsuarioDAO {
         List<Categoria> list = new ArrayList<>();
         String sql = "SELECT * FROM CATEGORIA;";
         try {
-            con = c.conectar();
+            con = c.conectar(); 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Categoria c = new Categoria();
-                c.setId(rs.getInt(1));
-                c.setNombre(rs.getString(2));
-                list.add(c);
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+                list.add(cat);
             }
+            con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return list;
+    }
+    public Municipio obtenerMunicipioID(int id) {
+       
+        String sql = "SELECT * FROM municipio where id_municipio="+id;
+        Municipio cat = new Municipio();
+        try {
+            con = c.conectar(); 
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cat.setId(rs.getInt(1));
+                cat.setNombre(rs.getString(2));
+            }
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return cat;
     }
 
   

@@ -34,9 +34,9 @@
 
                 </header>
                 <nav class="nav-menu --nav-dark-light" id="mySidenav">
-                    <form class="form-group " action="#">
+                    <form class="form-group " action="ControladorProducto">
                         <div class="form-group-container">
-                            <input type="text" class="form-group-input" placeholder="Buscar...">
+                            <input type="text" class="form-group-input" name="Buscar" placeholder="Buscar...">
                         </div>
                     </form>
                     <div class="form-group-container">
@@ -87,21 +87,15 @@
 
         <!-- Barra de navegacion secundaria -->
         <div class="container category_list">
-            <nav class="nav">
-
-                <p class="nav-item active has-text-weight-semibold category_item" category="all" href="#">Categorías</p>
-                <a class="nav-item has-text-weight-semibold category_item" category="Hombres" href="#">Hombres</a>
-                <a class="nav-item has-text-weight-semibold category_item" category="Mujeres">Mujeres</a>
-                <a class="nav-item has-text-weight-semibold category_item" category="Niños">Niños</a>
-                <a class="nav-item has-text-weight-semibold category_item" category="Niñas">Niñas</a>
-            </nav>
+            
         </div>
         <!-- Sección de fotografías -->
-        <div class="container">
-            <label for="btn-modal" class="lbl-modal">
+        <div class="container" style="margin-top:50px;">
+            
                 <div class="columns is-multiline">
                     <section class="products-list">
-                        <%  ProductoDAO dao = new ProductoDAO();
+                        <%  
+                            ProductoDAO dao = new ProductoDAO();
                             List<Producto> lista = dao.listar();
                             for (Producto p : lista) {
                                 String html = "<div class=\"product-item btn-abrir-popup\"  category=\"Hombres\" id=\"btn-abrir-popup\">"
@@ -109,20 +103,15 @@
                                         + "<label for=\"accion\" class=\"lbl\">"
                                         + "<img src=\"img/catalogo/" + p.getFoto() + "\"><a>" + p.getNombre() + ":  " + p.getDescripcion() + "</a></label>"
                                         + "<input type=\"hidden\" value=\""+p.getId()+"\" name=\"id\">"
-                                        + "<input type=\"submit\"  value=\"selecion\" name=\"accion\"></form></div>";
+                                        + "<input type=\"submit\" style=\"border:none; margin-left:55px;background-color:red;color:white;\"  value=\"Agregar al Carrito\" name=\"accion\"></form></div>";
                                 out.println(html);
                             }
-
                         %>
                     </section>
                 </div>
-            </label>
+          
         </div>
-               
-       
-                
-                        
-        <script src="js/main.js"></script>
+  
         
     </body>
 </html>

@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOST</version>
     <packaging>war</packaging>
 
-    <name>BeagClothing</name>
+    <name>Beag-Clothing</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

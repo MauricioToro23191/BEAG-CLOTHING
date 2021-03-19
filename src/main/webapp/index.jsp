@@ -59,16 +59,10 @@
 
         <!-- Barra de navegacion secundaria -->
         <div class="container">
-            <nav class="nav">
-                <p class="nav-item active has-text-weight-semibold" href="#">Categorías</p>
-                <a class="nav-item has-text-weight-semibold" href="#">Hombres</a>
-                <a class="nav-item has-text-weight-semibold" href="#">Mujeres</a>
-                <a class="nav-item has-text-weight-semibold" href="#">Niños</a>
-                <a class="nav-item has-text-weight-semibold" href="#">Niñas</a>
-            </nav>
+            
         </div>
         <<!-- Sección de fotografías -->
-        <div class="container">
+        <div class="container" style="margin-top:50px;">
             <label for="btn-modal" class="lbl-modal">
                 <div class="columns is-multiline">
                     <section class="products-list">

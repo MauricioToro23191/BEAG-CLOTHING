@@ -4,6 +4,11 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Municipio"%>
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,78 +31,158 @@
                     <a class="navbar-mobile-link has-text-white" href="index.jsp">BEAG CLOTHING</a>
                 </header>
                 <nav class="nav-menu --nav-dark-light" id="mySidenav">
+
+                    <div class="form-group-container">
+                        <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
+                    </div>
                     <form class="form-group " action="#">
                         <div class="form-group-container">
                             <input type="text" class="form-group-input" placeholder="Buscar...">
                         </div>
                     </form>
-                    <div class="form-group-container">
-                        <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
-                    </div>
-
                     <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="UsuarioRegistrado.jsp">BEAG CLOTHING</a>
                     <ul class="nav-menu-ul">
 
                         <li class="nav-menu-item" id="men">
-                            <a class="nav-menu-link link-submenu active" href="UsuarioRegistrado.jsp">Inicio </a>
+                            <a class="nav-menu-link link-submenu " href="UsuarioRegistrado.jsp">Inicio </a>
                         </li>
-                        <li class="nav-menu-item" id="women">
+                        <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
                         </li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link ">Hombre</a></li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Mujer</a></li>
-                        <li class="nav-menu-item"><a href="Usuarios.jsp" class="nav-menu-link">Administrador</a></li>
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link">Juan Andres</a></li>
-                        <li class="nav-menu-item"><a href="Inicio_Sesion.jsp" class="nav-menu-link">Cerrar Sesión</a></li>
+                        <%
+                            try {
+                                Usuario u = (Usuario) session.getAttribute("usuario");
+                                if (u.getTipoUsuario() == 1) {
+                                    out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
+                                }
+                            } catch (Exception ex) {
 
+                            }
+                        %>
+
+                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link"> 
+                                <%
+                                    try {
+                                        Usuario u = (Usuario) session.getAttribute("usuario");
+                                        out.println(u.getNombre1());
+                                    } catch (Exception ex) {
+
+                                    }
+                                %>
+
+                            </a></li>
+                        <li class="nav-menu-item"><a href="Inicio_Sesion.jsp" class="nav-menu-link">Cerrar Sesión</a></li>
                     </ul>
                 </nav>
             </nav>
         </header>
         <section>
             <div style="padding-top: 50px;">
-                <div class="validar_datos total ">
-                    <h1>Confirmar datos de envio</h1>
-                    <form>
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Correo Electrónico</label>
-                            <input type="text" placeholder="ingresa el correo">
-                        </div>
-                        <div class="col-3 col-s-10">
-
-                            <label for="correo" class="lbl">Identificación</label>
-                            <input type="password" placeholder="contraseña">
-                        </div >
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Dirección</label>
-                            <input type="password" placeholder="confirme contraseña">
-                        </div>
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Nombres</label>
-                            <input type="text" placeholder="ingresa nombres">
-                        </div>
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Apellidos</label>
-                            <input type="text" placeholder="ingresa apellidos">
-                        </div>
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Fecha de nacimineto</label>
-                            <input type="text" placeholder="ingresa tu edad ">
-                        </div >
-                        <div class="col-3 col-s-10" >
-                            <label for="correo" class="lbl">Telefóno</label>
-                            <input type="text" placeholder="ingresa el telefóno">
-                        </div>
-                        <div class="col-3 col-s-10">
-                            <label for="correo" class="lbl">Celular</label>
-                            <input type="text" placeholder="ingresa el celular ">
-                        </div>  
-                        <input type="submit" value="Guardar">
+                <%
+                    String Nombre2 = "";
+                    String Apellido2 = "";
+                    String Celular = "";
+                    Usuario u = (Usuario) session.getAttribute("usuario");
+                    try {
                         
-                    </form>
+                        
+                        if (u.getNombre2() != null) {
+                            Nombre2 = u.getNombre2();
+                        }
+                        
+                        if (u.getApellido2() != null) {
+                            Apellido2 = u.getApellido2();
+                        }
+                        
+                        if (u.getCelular() != null) {
+                            Celular = u.getCelular();
+                        }
 
-                </div>
+                    } catch (Exception ex) {
+                    }
+
+
+                %>
+                <centrer>
+                    <div class="total" style="">
+                        <h1>Confirmar datos de envio</h1>
+                        <div style="width: 80%; margin: auto; ">
+
+                            <form action="ControladorPedido" method="post">
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Correo Electrónico</label>
+                                    <input type="text" name="correo" value="<%=u.getCorreo()%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+
+                                    <label for="correo" class="lbl">Identificación</label>
+                                    <input type="text" name="identif"value="<%=u.getIdentificacion()%>">
+                                </div >
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Dirección</label>
+                                    <input type="text" name="direc" value="<%=u.getDireccion()%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Primer Nombre</label>
+                                    <input type="text" name="nombre1" value="<%=u.getNombre1()%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Segundo Nombre</label>
+                                    <input type="text" name="nombre2" value="<%=Nombre2%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Primer Apellido</label>
+                                    <input type="text" name="apellido1"name="apellido" value="<%=u.getApellido1()%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Segundo Apellido</label>
+                                    <input type="text" name="apellido2" value="<%=Apellido2%>">
+                                </div>
+                                <div class="col-3 col-s-10" >
+                                    <label for="correo" class="lbl">Telefóno</label>
+                                    <input type="text" name="telefono" value="<%=u.getTelefono()%>">
+                                </div>
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Celular</label>
+                                    <input type="text" name="celular" value="<%= Celular%>">
+                                </div>  
+
+                                <div class="col-3 col-s-10">
+                                    <label for="correo" class="lbl">Municipio</label>
+                                    <select name="CBMunicpio" >
+                                        <%
+                                            try {
+                                                UsuarioDAO dao = new UsuarioDAO();
+                                                List<Municipio> LM = dao.listarMunicipios();
+                                                Municipio idM = dao.obtenerMunicipioID(u.getMunicipio());
+                                                out.println("<option>" + idM.getNombre() + "</option>");
+                                                for (Municipio m : LM) {
+                                                    if (idM.getId() != m.getId()) {
+                                                        out.println("<option>" + m.getNombre() + "</option>");
+                                                    }
+                                                }
+                                            } catch (Exception ex) {
+                                                System.out.print(ex.getMessage());
+                                            }
+                                        %>
+                                    </select>
+                                </div>  
+                                <div class="col-5 col-s-10">
+                                    <input type="hidden" value="<%=u.getId()%>" name="id">
+                                    <div class="col-6 col-s-10">
+                                        <input type="submit" Style="margin-right:  10px "  class="botonActualizar " value="Guardar Cambios" name="accion">
+                                    </div>
+                                    <div class="col-6 col-s-10">
+                                        <input type="submit" Style="margin-left:  53px" class="botonCaja" value="Cancelar" name="accion">
+                                    </div>
+                                </div>  
+                            </form>
+                        </div>
+
+                    </div>
+                </centrer>
             </div>
+
         </section>
         <footer class="col-12">
             <h1>Pie de pagina</h1>

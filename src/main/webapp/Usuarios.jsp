@@ -25,7 +25,7 @@
 
     </head>
 
-    <body class="dark-edition">
+    <body>
         <div class="wrapper ">
             <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
                 <!--

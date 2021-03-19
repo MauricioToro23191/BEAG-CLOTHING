@@ -5,13 +5,11 @@
  */
 package Controlador;
 
-import Modelo.Producto;
 import Modelo.Usuario;
 import ModeloDAO.CarritoDAO;
-import ModeloDAO.ProductoDAO;
+import ModeloDAO.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +20,7 @@ import javax.swing.JOptionPane;
  *
  * @author mauri
  */
-public class ControladorCarrito extends HttpServlet {
-
-    ProductoDAO dao = new ProductoDAO();
-    CarritoDAO daoCarrito = new CarritoDAO();
-    Producto p = new Producto();
-    Usuario u = new Usuario();
+public class ControladorPedido extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +39,10 @@ public class ControladorCarrito extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCarrito</title>");
+            out.println("<title>Servlet ControladorPedido</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCarrito at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorPedido at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -81,40 +74,34 @@ public class ControladorCarrito extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accion = request.getParameter("accion");
-        switch (accion) {
-            
-            case "Agregar al Carrito":
+        String accion= request.getParameter("accion");
+        switch(accion){
+            case "Guardar Cambios":
+                UsuarioDAO dao=new UsuarioDAO();
+                CarritoDAO daoc= new CarritoDAO();
+                Usuario u = (Usuario)request.getSession().getAttribute("usuario");
+                u.setCorreo(request.getParameter("correo"));
+                u.setIdentificacion(request.getParameter("identif"));
+                u.setDireccion(request.getParameter("direc"));
+                u.setNombre1(request.getParameter("nombre1"));
+                u.setNombre2(request.getParameter("nombre2"));
+                u.setApellido1(request.getParameter("apellido1"));
+                u.setApellido2(request.getParameter("apellido2"));
+                u.setTelefono(request.getParameter("telefono"));
+                u.setCelular(request.getParameter("celular"));
+                dao.actualizar(u);
                 
-                int id = Integer.parseInt(request.getParameter("id"));
-                Producto p = dao.ObtenerXId(id);
-                request.setAttribute("prod", p);
-                request.getRequestDispatcher("POPup.jsp").forward(request, response);
-                break;
-            
-            case "Agregar":
-            
-                int id1 = Integer.parseInt(request.getParameter("id"));
-                p = dao.ObtenerXId(id1);
-                u = (Usuario) request.getSession().getAttribute("usuario");
-                int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-                request.setAttribute("cantidad", cantidad);
-                daoCarrito.agregar(p, u, cantidad);
-                request.getRequestDispatcher("Carrito.jsp").forward(request, response);
-                break;
-            
-            case "Siguiente":
+                daoc.AgregarPedido(u, 9000 ,  3000);
                 
-                request.getRequestDispatcher("Validar_Info_Envio.jsp").forward(request, response);
+                
+                request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
                 break;
+            case"Cancelar":
+                JOptionPane.showMessageDialog(null, "Operacion cancelada");
+                request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
+                break; 
             
-            case "X":
-                int idE =Integer.parseInt(request.getParameter("id"));
-                daoCarrito.Eliminar(idE);
-                request.getRequestDispatcher("Carrito.jsp").forward(request, response);
-                break;
         }
-
     }
 
     /**

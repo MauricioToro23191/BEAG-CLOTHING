@@ -157,6 +157,9 @@ public class ControladorProducto extends HttpServlet {
                 dao.Eliminar(idE);
                 request.getRequestDispatcher("Productos.jsp").forward(request, response);
                 break;
+            case "Cerrar Sesión":
+                request.getRequestDispatcher("Productos.jsp").forward(request, response);
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Opcion incorrecta");
                 break;

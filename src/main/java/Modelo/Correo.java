@@ -1,5 +1,8 @@
 package Modelo;
 
+import ModeloDAO.CarritoDAO;
+import ModeloDAO.ProductoDAO;
+import ModeloDAO.UsuarioDAO;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
@@ -14,8 +17,8 @@ public class Correo {
     
     String  usuario = "beagclothingppi@gmail.com",
             contrasena = "BeagClothing123",
-            host = "smtp.gmail.com",
-            port  = "465";
+            host = "smtp.gmail.com";
+    int     port  = 465;
     
     public synchronized boolean sendMail(String para, String asunto,String mensaje){
         Properties props = new Properties();
@@ -52,7 +55,11 @@ public class Correo {
         }
     }
     
-    public synchronized boolean confirmarPedido(Usuario usuario, List<Carrito> carrito, Pedido pedido){
+    public synchronized boolean confirmarPedido(Usuario usuario, List<Carrito> carrito){
+        UsuarioDAO dao = new UsuarioDAO ();
+        ProductoDAO daoP= new ProductoDAO();
+        CarritoDAO daoC=new CarritoDAO();
+        Pedido ulPedido= daoC.obtenerUltimoPE();
         Properties props = new Properties();
         props.put("mail.smtp.user", this.usuario );
         props.put("mail.smtp.host", this.host);
@@ -67,15 +74,25 @@ public class Correo {
         String mensaje = ""
                 + "<div style=\"margin: 0 15%;\"><h1 style=\"text-align: center;\">Confirmaci&oacute;n del pedido</h1><hr><br></div>"
                 + "<div style=\"margin: 0 20%;\"><p style=\"text-align: left;\"><b>" + usuario.getNombre1() + "<br />" 
-                + usuario.getDireccion() + "<br />" + usuario.getMunicipio() + "<br />"
+                + usuario.getDireccion() + "<br />" + dao.obtenerMunicipioID(usuario.getMunicipio()).getNombre() + "<br />"
                 + usuario.getIdentificacion() + "</b></p>"
                 + "<p style=\"text-align: right;\">Cliente: " + usuario.getId()
-                + "<br>Confirmaci&oacute;n de pedido n&deg;: " + pedido.getId()
-                + "<br>Fecha de confirmaci&oacute;n: " + pedido.getFechaPedido() + "</p>"
+                + "<br>Confirmaci&oacute;n de pedido n&deg;: " + ulPedido.getId()
+                + "<br>Fecha de confirmaci&oacute;n: " + ulPedido.getFechaPedido().toString() + "</p>"
                 + "<p style=\"text-align: left;\"><br>Estimado/a <b>" + usuario.getNombre1() + " " + usuario.getApellido1() + "</b>,<br>"
                 + "<br>Muchas gracias por su compra, le enviaremos un correo de nuevo cuando su orden sea procesada.<br><br>"
                 + "A continuaci&oacute;n encontrar&aacute; una lista detallada del pedido realizado: "
-                + "</p></div>";
+                + "</p>"
+                + "<p>Subtotal del pedido: $ "+ulPedido.getTotal()+"</p><br>"
+                + "<p>Costo de envio: $ "+ulPedido.getCostoEnvio()+"</p><br>"
+                + "<p>Precio a Pagar: $ "+ulPedido.getTotal()+"</p></div></div>";
+        
+        mensaje+="<table  border=\"1\"><thead><tr><th>Nombre</th><th>cantidad</th><th>precio</th><th>total</th></tr></thead><tbody>";
+                for(Carrito c: carrito){
+                    Producto p = daoP.ObtenerXId(c.getP());
+                    mensaje+="<tr><td>"+p.getNombre()+"</td><td>"+c.getCantidad()+"</td><td>"+p.getPrecio()+"</td><td>"+(c.getCantidad()*p.getPrecio())+"</td></tr>";
+                }
+        mensaje+=" </tbody></table>";
         
         
         
@@ -86,15 +103,17 @@ public class Correo {
             MimeMessage msg = new MimeMessage(session);
             msg.setContent(mensaje, "text/html");
             
-            msg.setSubject("BEAG - Confirmación de la orden " + pedido.getId());
+            msg.setSubject("BEAG - Confirmación de la orden " + ulPedido.getId());
             msg.setFrom(new InternetAddress(this.usuario));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(usuario.getCorreo()));
 
             msg.saveChanges();
             Transport transport = session.getTransport("smtp");
-            transport.connect(this.host, this.usuario, this.contrasena);
+            transport.connect(this.usuario, this.contrasena);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
+            JOptionPane.showMessageDialog(null, "Se envio un correo con los datos del pedido a su correo electronico, "
+                    + "/r/npronto nos comunicaremos para ultimar detalles del pedido");
             return true;
         } catch (MessagingException mex)
         {

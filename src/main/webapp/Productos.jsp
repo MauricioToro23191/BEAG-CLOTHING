@@ -27,8 +27,8 @@
 
     </head>
 
-    <body class="dark-edition">
-        <div class="wrapper ">
+    <body>
+        <div class="wrapper">
             <div class="sidebar" data-color="purple" data-background-color="black" data-image="img/fondo1.jpg">
                 <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"

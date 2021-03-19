@@ -4,6 +4,12 @@
     Author     : mauricio
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="ModeloDAO.ProductoDAO"%>
+<%@page import="Modelo.Carrito"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.CarritoDAO"%>
 <%@page import="Modelo.Producto"%>
 <%@page import="Modelo.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,34 +35,34 @@
                     <a class="navbar-mobile-link has-text-white" href="index.jsp">BEAG CLOTHING</a>
                 </header>
                 <nav class="nav-menu --nav-dark-light" id="mySidenav">
+                    
+                    <div class="form-group-container">
+                        <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
+                    </div>
                     <form class="form-group " action="#">
                         <div class="form-group-container">
                             <input type="text" class="form-group-input" placeholder="Buscar...">
                         </div>
                     </form>
-                    <div class="form-group-container">
-                        <img src="img/LogoNav.png" width="103" height="38" alt="logo"/>
-                    </div>
-
                     <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="UsuarioRegistrado.jsp">BEAG CLOTHING</a>
                     <ul class="nav-menu-ul">
-
+                        
                         <li class="nav-menu-item" id="men">
                             <a class="nav-menu-link link-submenu " href="UsuarioRegistrado.jsp">Inicio </a>
                         </li>
                         <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
                         </li>
-                                                    <%
-                                try {
-                                    Usuario u = (Usuario) session.getAttribute("usuario");
-                                    if (u.getTipoUsuario() == 1) {
-                                        out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
-                                    }
-                                } catch (Exception ex) {
-
+                        <%
+                            try {
+                                Usuario u = (Usuario) session.getAttribute("usuario");
+                                if (u.getTipoUsuario() == 1) {
+                                    out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
                                 }
-                            %>
+                            } catch (Exception ex) {
+
+                            }
+                        %>
 
                         <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link"> 
                                 <%
@@ -90,67 +96,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <input class="eliminar"type="submit" value="X" />
-                                    <img style="width: 100px" src="img/catalogo/Blanca.jpeg"/>
-
-                                </td>
-                                <td style="vertical-align:middle;">Camiseta blanca</td>
-                                <td style="vertical-align:middle;">$20.000</td>
-                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                                <td style="vertical-align:middle;">$40.000</td>
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    <input class="eliminar"type="submit" value="X" />
-                                    <img style="width: 100px" src="img/catalogo/NegraMangasVerdes.jpeg"/>
-
-                                </td>
-                                <td style="vertical-align:middle;"> Camiseta negra con mangas verdes</td>
-                                <td style="vertical-align:middle;">$20.000</td>
-                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                                <td style="vertical-align:middle;">$40.000</td>
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    <input class="eliminar" type="submit" value="X" />
-                                    <img style="width: 100px" src="img/catalogo/GorraGris.jpeg"/>
-
-                                </td>
-                                <td style="vertical-align:middle;"> Gorra blanca</td>
-                                <td style="vertical-align:middle;">$20.000</td>
-                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                                <td style="vertical-align:middle;">$40.000</td>
-                            </tr>
-                            <tr>
-
-                                <td>
-                                    <input class="eliminar" type="submit" value="X" />
-                                    <img style="width: 100px" src="img/catalogo/VinotintoMangaBlanca.jpeg"/>
-
-                                </td>
-                                <td style="vertical-align:middle;"> camiseta vinotinto</td>
-                                <td style="vertical-align:middle;">$20.000</td>
-                                <td style="vertical-align:middle;"><input type="submit" value="+" /> 2 <input type="submit" value="-" /></td>
-                                <td style="vertical-align:middle;">$40.000</td>
-                            </tr>
-                            
                             <%
-                                Producto p=(Producto)request.getAttribute("prod");
-                                int Cantidad=Integer.parseInt(request.getParameter("cantidad"));
-                                
-                                String html="<tr><td><input class=\"eliminar\" type=\"submit\" value=\"X\" />"+
-                                    "<img style=\"width: 100px\" src=\"img/catalogo/"+p.getFoto()+"\"/>"
-                                    +"</td><td style=\"vertical-align:middle;\"> "+p.getNombre()+"</td>"
-                                +"<td style=\"vertical-align:middle;\">$"+p.getPrecio()+"</td>"
-                                +"<td style=\"vertical-align:middle;\"><input type=\"number\" value=\""+Cantidad+"\" /></td>"
-                                +"<td style=\"vertical-align:middle;\">$"+(Cantidad*p.getPrecio())+"</td>";
-                                out.println(html);
-                            
+                                float SubTotal=0;
+                                float envio=9000;
+                                try {
+                                    ProductoDAO daop = new ProductoDAO();
+                                    CarritoDAO daoc = new CarritoDAO();
+                                    Usuario u = (Usuario) session.getAttribute("usuario");
+                                    List<Carrito> lista = daoc.listar(u);
+                                    
+                                    for (Carrito C : lista) {
+                                        Producto p = daop.ObtenerXId(C.getP());
+                                        float ToralProduc=(C.getCantidad() * p.getPrecio());
+                                        String html = "<tr><form action=\"ControladorCarrito\" method=\"post\"><td><input class=\"eliminar\" type=\"submit\" value=\"X\" name=\"accion\" />"
+                                                + "<input  type=\"hidden\" value=\""+C.getId()+"\" name=\"id\" /><img style=\"width: 100px\" src=\"img/catalogo/" + p.getFoto() + "\"/>"
+                                                + "</td><td style=\"vertical-align:middle;\"> " + p.getNombre() + "</td>"
+                                                + "<td style=\"vertical-align:middle;\">$" + p.getPrecio() + "</td>"
+                                                + "<td style=\"vertical-align:middle;\">" + C.getCantidad() +"</td>"
+                                                + "<td style=\"vertical-align:middle;\">$" + ToralProduc + "</td></form></tr>";
+                                        out.println(html);
+                                        SubTotal=SubTotal+ToralProduc;
+                                    }
+                                    request.setAttribute("subTotal",SubTotal);
+                                    request.setAttribute("envio", envio);
+                                } catch (Exception ex) {
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                                }
+
                             %>
+                            
                         </tbody>
                     </table>
                     <hr>
@@ -158,23 +132,20 @@
                 <div class="total col-4 col-s-12 " style="padding-top: 50px;padding-bottom: 80PX">
                     <h1>Total</h1>
                     <hr>
-                    <h4>Subtotal <span id="subtotal">$160.000</span></h4>
+                    <h4>Subtotal <span  name="subtotal" id="subtotal"><%=SubTotal%></span></h4>
                     <hr>
-                    <h4>Envío <span id="subtotal">$9.000</span> </h4>
+                    <h4>Envío <span name="CostoE"id="subtotal">$<%=envio%></span> </h4>
                     <hr>
-                    <h4>Total <span id="subtotal">$169.000</span> </h4>
+                    <h4>Total <span name="total"id="subtotal">$<%= SubTotal+envio %></span> </h4>
                     <hr>
-                    <form method="POST" action="">
-                        <input type="submit" value="Actualizar carrito" class="botonActualizar" />
-                        <a href="Validar_Info_Envio.jsp">a<input type="submit" value="Siguiente" class="botonCaja"/></a>
+                    <form method="POST" action="ControladorCarrito">
+                        <input type="submit" value="Actualizar carrito" name="accion" class="botonActualizar" />
+                        <a href="Validar_Info_Envio.jsp"><input type="submit" value="Siguiente" name="accion" class="botonActualizar"/></a>
                     </form>
                 </div>
             </div>
-
-
-
-        </section>
-        <footer class="col-12">
+        </section>  
+                    <footer class="col-12">
             <h1>Pie de pagina</h1>
             <div>
                 <span>inicio</span>
