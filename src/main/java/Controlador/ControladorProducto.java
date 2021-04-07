@@ -7,25 +7,13 @@ package Controlador;
 
 import Modelo.Producto;
 import ModeloDAO.ProductoDAO;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.swing.JOptionPane;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.UploadContext;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
@@ -91,7 +79,6 @@ public class ControladorProducto extends HttpServlet {
             throws ServletException, IOException {
         String accion = "";
         accion = request.getParameter("accion");
-        String archivourl = "C:\\Users\\mauri\\Documents\\NetBeansProjects\\BeagClothing\\src\\main\\webapp\\img\\Catalogo1\\BlancaMangaNegra.jpeg";
         switch (accion) {
             case "CrearProducto":
                 String nombre = request.getParameter("txtNombre");
@@ -158,7 +145,11 @@ public class ControladorProducto extends HttpServlet {
                 request.getRequestDispatcher("Productos.jsp").forward(request, response);
                 break;
             case "Cerrar Sesión":
-                request.getRequestDispatcher("Productos.jsp").forward(request, response);
+                
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+            case "categoria":
+                String categori=request.getParameter("categoria");
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Opcion incorrecta");
@@ -176,7 +167,7 @@ public class ControladorProducto extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    @Override
+    @Override   
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

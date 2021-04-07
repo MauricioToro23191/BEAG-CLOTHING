@@ -29,13 +29,13 @@
 
     <body>
         <div class="wrapper">
-            <div class="sidebar" data-color="purple" data-background-color="black" data-image="img/fondo1.jpg">
+            <div class="sidebar" data-color="green" data-background-color="black" data-image="img/fondo1.jpg">
                 <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
           
                   Tip 2: you can also add an image using data-image tag
                 -->
-                <div class="logo"><a href="UsuarioRegistrado.jsp" class="simple-text logo-normal">
+                <div class="logo"><a href="index.jsp" class="simple-text logo-normal">
                         BEAG CLOTHING
                     </a></div>
                 <div class="sidebar-wrapper">
@@ -57,13 +57,6 @@
                             <a class="nav-link" href="Pedidos_Admin.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Pedidos</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link" href="Tablas.jsp">
-                                <i class="material-icons">grid_on</i>
-                                <p>Otras Tablas</p>
                             </a>
                         </li>
                     </ul>

@@ -27,7 +27,8 @@
 
     <body>
         <div class="wrapper ">
-            <div class="sidebar" data-color="purple" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+      
+            <div class="sidebar" data-color="azure" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
                 <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
           
@@ -54,13 +55,6 @@
                             <a class="nav-link" href="Pedidos_Admin.jsp">
                                 <i class="material-icons">content_paste</i>
                                 <p>Pedidos</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./Tablas.jsp">
-                                <i class="material-icons">grid_on</i>
-                                <p>Otras Tablas</p>
                             </a>
                         </li>
                     </ul>

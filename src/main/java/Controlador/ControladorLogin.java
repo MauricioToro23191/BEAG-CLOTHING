@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import Modelo.*;
 import ModeloDAO.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
@@ -117,7 +115,7 @@ public class ControladorLogin extends HttpServlet {
                 session=request.getSession();
                 session.setAttribute("usuario", u);
                                
-                request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             case "Editar":
 //                String ide = request.getParameter("correo");
@@ -157,7 +155,7 @@ public class ControladorLogin extends HttpServlet {
                 u =dao.ObtenerUsuario(Correo, contra);
                 if(u!=null){
                    session.setAttribute("usuario", u);
-                   request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
+                   request.getRequestDispatcher("index.jsp").forward(request, response);
                 }else{
                     JOptionPane.showMessageDialog(null,"Usuario Invalido");
                     request.getRequestDispatcher("Inicio_Sesion.jsp").forward(request, response);
