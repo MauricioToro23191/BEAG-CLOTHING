@@ -9344,7 +9344,7 @@ button.bg-dark:focus {
 
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #0c7cd5 !important;
+  color: black !important;
 }
 
 .text-secondary {
@@ -9461,7 +9461,7 @@ a.text-dark:focus {
 
 .btn.btn-primary {
   color: #fff;
-  background-color: #9c27b0;
+  background-color: green;
   border-color: #9c27b0;
   box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
 }
@@ -14440,7 +14440,7 @@ h2.title {
 }
 
 .text-primary {
-  color: #9c27b0 !important;
+  color: black !important;
 }
 
 .text-danger {
@@ -15436,7 +15436,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 
 .sidebar[data-color="green"] li.active>a {
-  background-color: #4caf50;
+  background-color: green;
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
 }
 
@@ -15509,7 +15509,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 
 .sidebar[data-background-color="red"] .nav li:hover:not(.active)>a,
 .sidebar[data-background-color="red"] .nav li.active>[data-toggle="collapse"] {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: gray rgba(255, 255, 255, 0.1);
 }
 
 .sidebar[data-image]:after,
@@ -17302,7 +17302,7 @@ label {
 .card.bg-primary,
 .card.card-rotate.bg-primary .front,
 .card.card-rotate.bg-primary .back {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
+  background: linear-gradient(green, green, green);
 }
 
 .card .card-header-info .card-icon,
@@ -20412,7 +20412,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .dark-edition .sidebar[data-color="green"] li.active>a {
-  background: linear-gradient(60deg, #288c6c, #4ea752);
+  background-color:  linear-gradient(green, green, green);
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(76, 175, 80, 0.4);
 }
 
@@ -21946,7 +21946,7 @@ fieldset[disabled][disabled] .dark-edition .has-error .form-control,
 }
 
 .dark-edition .text-primary {
-  color: #a84ab7 !important;
+  color: black !important;
 }
 
 .dark-edition .text-muted,
