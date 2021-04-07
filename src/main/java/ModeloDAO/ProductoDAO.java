@@ -58,7 +58,37 @@ public class ProductoDAO {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return list;
+    }
+    
+    public List<Producto> listarCatalogo() {
+        List<Producto> list = new ArrayList<>();
+        String sql = "select * from producto order by(id_producto) where Categoria=''";
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+                p.setId(rs.getInt(1));
+                p.setNombre(rs.getString(2));
+                p.setFecha(rs.getDate(3).toLocalDate());
+                p.setPrecio(rs.getFloat(4));
+                p.setCantidad(rs.getInt(5));
+                p.setColor(rs.getString(6));
+                p.setFoto(rs.getString(7));
+                p.setDescripcion(rs.getString(8));
+                p.setEstado(rs.getString(9));
+                p.setId_talla(rs.getInt(10));
+                p.setId_tipo(rs.getInt(11));
+                p.setId_categoria(rs.getInt(12));
+                list.add(p);
 
+            }
+            con.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return list;
     }
 
     public void agregar(Producto p) {
@@ -166,49 +196,48 @@ public class ProductoDAO {
         return "";
     }
 
-    public List<Talla> listarTalla() {
-        List<Talla> list = new ArrayList<>();
-        try {
-            con = c.conectar();
-            ps = con.prepareStatement("SELECT ID_TALLA, NOMBRE FROM TALLA");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Talla t = new Talla();
-                t.setId(rs.getInt(1));
-                t.setNombre(rs.getString(2));
-                list.add(t);
+//    public List<Talla> listarTalla() {
+//        List<Talla> list = new ArrayList<>();
+//        try {
+//            con = c.conectar();
+//            ps = con.prepareStatement("SELECT ID_TALLA, NOMBRE FROM TALLA");
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Talla t = new Talla();
+//                t.setId(rs.getInt(1));
+//                t.setNombre(rs.getString(2));
+//                list.add(t);
+//            }
+//            con.close();
+//        } catch (SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return list;
+//    }
 
-            }
-            con.close();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return list;
-    }
-
-    public List<TipoProducto> listarTipo() {
-        List<TipoProducto> list = new ArrayList<>();
-        String sql = "SELECT * FROM TIPO_PRODUCTO;";
-        try {
-            con = c.conectar();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                TipoProducto t = new TipoProducto();
-                t.setId(rs.getInt(1));
-                t.setNombre(rs.getString(2));
-                list.add(t);
-            }
-            con.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-        }
-        return list;
-    }
+//    public List<TipoProducto> listarTipo() {
+//        List<TipoProducto> list = new ArrayList<>();
+//        String sql = "SELECT * FROM TIPO_PRODUCTO;";
+//        try {
+//            con = c.conectar();
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                TipoProducto t = new TipoProducto();
+//                t.setId(rs.getInt(1));
+//                t.setNombre(rs.getString(2));
+//                list.add(t);
+//            }
+//            con.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, ex.getMessage());
+//        }
+//        return list;
+//    }
 
     public List<Categoria> listarCategoria() {
         List<Categoria> list = new ArrayList<>();
-        String sql = "SELECT * FROM CATEGORIA;";
+        String sql = "SELECT * FROM CATEGORIA";
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);

@@ -27,7 +27,7 @@
     </head>
     <body>
         <div class="wrapper ">
-            <div class="sidebar" data-color="Red" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+            <div class="sidebar" data-color="green" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
                 <div class="logo">
                     <a href="UsuarioRegistrado.jsp" class="simple-text logo-normal">
                         BEAG CLOTHING
@@ -51,14 +51,6 @@
                             <a class="nav-link" href="./Productos.jsp">
                                 <i class="material-icons">style</i>
                                 <p>Productos</p>
-                            </a>
-                        </li>
-
-
-                        <li class="nav-item ">
-                            <a class="nav-link" href="./Tablas.jsp">
-                                <i class="material-icons">grid_on</i>
-                                <p>Otras Tablas</p>
                             </a>
                         </li>
                     </ul>
