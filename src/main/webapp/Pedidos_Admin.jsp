@@ -4,6 +4,11 @@
     Author     : mauricio
 --%>
 
+<%@page import="Modelo.Municipio"%>
+<%@page import="Modelo.DetalleProducto"%>
+<%@page import="Modelo.Producto"%>
+<%@page import="ModeloDAO.ProductoDAO"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="Modelo.Pedido"%>
 <%@page import="java.util.List"%>
@@ -20,16 +25,18 @@
             BEAG | Administrador - Pedidos
         </title>
         <!--     Fonts and icons     -->
+        <link rel="stylesheet" href="modal.css">
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
         <!-- CSS Files -->
         <link href="css/material-dashboard.css" rel="stylesheet" />
+        
     </head>
     <body>
         <div class="wrapper ">
             <div class="sidebar" data-color="green" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
                 <div class="logo">
-                    <a href="UsuarioRegistrado.jsp" class="simple-text logo-normal">
+                    <a href="index.jsp" class="simple-text logo-normal">
                         BEAG CLOTHING
                     </a>
                 </div>
@@ -111,6 +118,9 @@
                                             <table class="table">
                                                 <thead class=" text-primary">
                                                 <th>
+
+                                                </th>
+                                                <th>
                                                     ID
                                                 </th>
                                                 <th>
@@ -128,18 +138,27 @@
                                                 <th>
                                                     ID_USUARIO
                                                 </th>
-
                                                 </thead>
                                                 <tbody><%
                                                     CarritoDAO dao = new CarritoDAO();
+                                                    UsuarioDAO Udao = new UsuarioDAO();
                                                     List<Pedido> lista = dao.ListarPedido();
 
                                                     for (Pedido p : lista) {
-                                                        String html = "<tr><td>" + p.getId() + "</td><td>" + p.getTotal() + "</td><td>" + p.getCostoEnvio() + "</td>"
-                                                                + "<td>" + LocalDate.now().toString() + "</td><td >" + p.getEstado() + "</td><td>" + p.getU()+ "</td></tr>";
+                                                        String html = "<tr><div class=\"lineaTabla\">"
+                                                                + "<td><form action=\"ControladorPedido\" method=\"POST\">"
+                                                                + "<input type=\"hidden\" value=\"" + p.getId() + "\" name=\"id\">"
+                                                                + "<input type=\"submit\" name=\"accion\" value=\"Seleccionar\" style=\"border:none;\">" + "</form></td>"
+                                                                + "<td>" + p.getId() + "</td>"
+                                                                + "<td>" + p.getTotal() + "</td><td>" + p.getCostoEnvio() + "</td>"
+                                                                + "<td>" + p.getFechaPedido().toString() + "</td>"
+                                                                + "<td >" + dao.obtenerEstadoP(p.getEstado()) + "</td>"
+                                                                + "<input type=\"hidden\" value=\"" + p.getId() + "\" name=\"id\">"
+                                                                + "<td><center>" + Udao.ObtenerID(p.getU()).getNombre1() + "<a style=\"margin-left: 20px;\"  class=\"open-modal\" data-open=\"modal1\"><i class=\"material-icons\">remove_red_eye</i></a></center></td></div></tr>";
                                                         out.println(html);
                                                     }
                                                     %>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -149,6 +168,93 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">Productos</h4>
+                            <p class="card-category">Lista de productos</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>
+                                        Foto
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cantidad
+                                    </th>
+                                    <th>
+                                        Precio
+                                    </th>
+                                    <th>
+                                        color
+                                    </th>
+                                    <th>
+                                        talla
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                            int id = Integer.valueOf(request.getParameter("id"));
+                                            List<DetalleProducto> Detalles = dao.Listar_Detalle_producto(id);
+                                            ProductoDAO PRODAO = new ProductoDAO();
+                                            for (DetalleProducto d : Detalles) {
+                                                Producto p = d.getProducto();
+                                                String html = "<tr>"
+                                                        + "<td>"
+                                                        + "<img src=\"img/catalogo/" + p.getFoto() + "\" width=\"150\" height=\"180\" />"
+                                                        + "</td>"
+                                                        + "<td>" + p.getNombre() + "</td>"
+                                                        + "<td>" + d.getCantidad() + "</td>"
+                                                        + "<td>" + d.getPrecio() + "</td>"
+                                                        + "<td>" + p.getColor() + "</td>"
+                                                        + "<td>" + PRODAO.validarTalla(p.getId_talla()) + "</td>"
+                                                        + "</tr>";
+                                                out.println(html);
+                                            }
+                                        %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
     </body>
+    <script>
+        const openEls = document.querySelectorAll("[data-open]");
+        const closeEls = document.querySelectorAll("[data-close]");
+        const isVisible = "is-visible";
+
+        for (const el of openEls) {
+            el.addEventListener("click", function () {
+                const modalId = this.dataset.open;
+                document.getElementById(modalId).classList.add(isVisible);
+            });
+        }
+
+        for (const el of closeEls) {
+            el.addEventListener("click", function () {
+                this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+            });
+        }
+
+        document.addEventListener("click", e => {
+            if (e.target == document.querySelector(".modal.is-visible")) {
+                document.querySelector(".modal.is-visible").classList.remove(isVisible);
+            }
+        });
+
+        document.addEventListener("keyup", e => {
+            // if we press the ESC
+            if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+                document.querySelector(".modal.is-visible").classList.remove(isVisible);
+            }
+        });
+    </script>
 </html>
