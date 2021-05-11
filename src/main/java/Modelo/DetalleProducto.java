@@ -14,14 +14,16 @@ public class DetalleProducto {
     int cantidad;
     float precio;
     Producto producto;
-    Pedido pedido;
 
-    public DetalleProducto(int id, int cantidad, float precio, Producto producto, Pedido pedido) {
+    public DetalleProducto(int id, int cantidad, float precio, Producto producto) {
         this.id = id;
         this.cantidad = cantidad;
         this.precio = precio;
         this.producto = producto;
-        this.pedido = pedido;
+    }
+    
+
+    public DetalleProducto() {
     }
 
     public int getId() {
@@ -55,15 +57,4 @@ public class DetalleProducto {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-    
-    
-    
 }
