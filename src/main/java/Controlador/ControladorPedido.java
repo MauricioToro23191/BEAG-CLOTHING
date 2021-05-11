@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -75,8 +75,9 @@ public class ControladorPedido extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String accion= request.getParameter("accion");
+        HttpSession session=request.getSession();
         switch(accion){
-            case "Guardar Cambios":
+            case "Finalizar pedido":
                 UsuarioDAO dao=new UsuarioDAO();
                 CarritoDAO daoc= new CarritoDAO();
                 Usuario u = (Usuario)request.getSession().getAttribute("usuario");
@@ -89,18 +90,20 @@ public class ControladorPedido extends HttpServlet {
                 u.setApellido2(request.getParameter("apellido2"));
                 u.setTelefono(request.getParameter("telefono"));
                 u.setCelular(request.getParameter("celular"));
+                
+                float subtotal=(float)session.getAttribute("subTotal");
+                float envio=(float) session.getAttribute("envio");
                 dao.actualizar(u);
-                
-                daoc.AgregarPedido(u, 9000 ,  3000);
-                
-                
-                request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
+                daoc.AgregarPedido(u,subtotal,envio);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
-            case"Cancelar":
-                JOptionPane.showMessageDialog(null, "Operacion cancelada");
-                request.getRequestDispatcher("UsuarioRegistrado.jsp").forward(request, response);
-                break; 
-            
+            case "Seleccionar":
+                int id=Integer.valueOf(request.getParameter("id"));
+                request.setAttribute("id", id);
+                request.getRequestDispatcher("Pedidos_Admin.jsp").forward(request, response);
+            case "Cancelar":
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
         }
     }
 
