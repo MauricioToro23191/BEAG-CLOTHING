@@ -27,7 +27,6 @@
     <body>
         <!-- Barra de navegación -->
         <header>
-
             <nav class="navbar">
                 <header class="nabvar-mobile is-size-5-mobile">
                     <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile">MENÚ</a>
@@ -50,27 +49,23 @@
                         <li class="nav-menu-item" id="men">
                             <a class="nav-menu-link link-submenu active" href="index.jsp">Inicio </a>
                         </li>
-                        
-                        
-                            <%
-                                try {
-                                    Usuario u = (Usuario) session.getAttribute("usuario");
-                                    if (u.getTipoUsuario() == 1) {
-                                        out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
-                                    }
-                                } catch (Exception ex) {
-
-                                }
-                            %>
-
                         <%
+                            try {
+                                Usuario u = (Usuario) session.getAttribute("usuario");
+                                if (u.getTipoUsuario() == 1) {
+                                    out.println("<li class=\"nav-menu-item\"" + "><a href=\"" + "Usuarios.jsp\"" + " class=\"nav-menu-link\"" + ">Administrador</a></li>");
+                                }
+                            } catch (Exception ex) {
+
+                            }
                             if (session.getAttribute("usuario") != null) {
                                 Usuario u = (Usuario) session.getAttribute("usuario");
-                                
-                                out.println("<li class=\"nav-menu-item\" id=\"women\"><a href=\"Carrito.jsp\" class=\"nav-menu-link link-submenu\">Carrito</a></li>"
-                                        + "<li class=\"nav-menu-item\"><a href=\"index.jsp\" class=\"nav-menu-link\">" + u.getNombre1() + "</a></li>"
+
+                                out.println(""
+                                        + "<li class=\"nav-menu-item\" id=\"women\"><a href=\"Carrito.jsp\" class=\"nav-menu-link link-submenu\">Carrito</a></li>"
+                                        + "<li class=\"nav-menu-item\"><a  href=\"index.jsp\"  class=\"nav-menu-link\">" + u.getNombre1() + "</a></li>"
                                         + "<form action=\"ControladorLogin\" method=\"post\">"
-                                                + "<input type=\"submit\" value=\"Cerrar Sesion\" name=\"accion\" class=\"nav-menu-link nav-menu-item \" style=\"border:none\"></form>");
+                                        + "<input type=\"submit\" onclick=\"btn2()\" value=\"Cerrar Sesion\" name=\"accion\" class=\"nav-menu-link nav-menu-item \" style=\"border:none\"></form>");
                             } else {
                                 out.println("<li class=\"nav-menu-item\"><a href=\"Inicio_Sesion.jsp\" class=\"nav-menu-link\">Iniciar Sesión</a></li>"
                                         + "<li class=\"nav-menu-item\"><a href=\"Registro.jsp\" class=\"nav-menu-link\">Registrar</a></li>");
@@ -88,35 +83,32 @@
         </div>
 
         <!-- Barra de navegacion secundaria -->
-        <div class="container category_list" style="margin-top: 30px; border: gray solid 1px; width: 400px; padding-left: 35px; padding: 30px;" >
+        <div class="container category_list" style="margin: auto;margin-top: 30px; border: gray solid 1px; width: 400px; padding-left: 35px; padding: 30px;" >
             <%
                 ProductoDAO dao = new ProductoDAO();
-                String Html="";
-                List<Categoria> listaCat=dao.listarCategoria();
-                for(Categoria c: listaCat){
-                    Html+="<span><a href=\"index.jsp\" class=\"nav-menu-link\" style=\"display:inline \">"+c.getNombre()+"</a><//span>";
+                String Html = "";
+                List<Categoria> listaCat = dao.listarCategoria();
+                for (Categoria c : listaCat) {
+                    Html += "<span><a href=\"index.jsp\" class=\"nav-menu-link\" style=\"display:inline \">" + c.getNombre() + "</a><//span>";
                 }
-                out.print(Html+"");
-                
+                out.print(Html + "");
             %>
         </div>
         <!-- Sección de fotografías -->
-        <div class="container" style="margin-top:50px;">
+        <div class="container" style="margin:auto;margin-top:50px;  ">
             <div class="columns is-multiline">
                 <section class="products-list">
-                    <%  
-                        
-                        List<Producto> lista = dao.listar();
+                    <%                        List<Producto> lista = dao.listar();
                         for (Producto p : lista) {
                             String html = "<div class=\"product-item btn-abrir-popup\"  category=\"Hombres\" id=\"btn-abrir-popup\">"
-                                        + "<form action=\"ControladorCarrito\" method=\"post\">"
-                                        + "<label for=\"accion\" class=\"lbl\">"
-                                        + "<img src=\"img/catalogo/" + p.getFoto() + "\"><a>" + p.getNombre() + ":  " + p.getDescripcion() + "</a></label>"
-                                    + "<input type=\"hidden\" value=\""+p.getId()+"\" name=\"id\">";
-                            if (session.getAttribute("usuario") != null){
-                                html+="<input type=\"submit\" style=\"border:none; margin-left:55px;background-color:black; color:white;\"  value=\"Agregar al Carrito\" name=\"accion\">";
+                                    + "<form action=\"ControladorCarrito\" method=\"post\">"
+                                    + "<label for=\"accion\" class=\"lbl\">"
+                                    + "<img src=\"img/catalogo/" + p.getFoto() + "\"><a>" + p.getNombre() + ":  " + p.getDescripcion() + "</a></label>"
+                                    + "<input type=\"hidden\" value=\"" + p.getId() + "\" name=\"id\">";
+                            if (session.getAttribute("usuario") != null) {
+                                html += "<input type=\"submit\" style=\"border:none; margin-left:55px;background-color:green; color:white;border-bottom-left-radius:0.1px;\" class=\"botn\" value=\"Agregar al Carrito\" name=\"accion\">";
                             }
-                            out.println(html+"</form></div>");
+                            out.println(html + "</form></div>");
                         }
                     %>    
                 </section>
