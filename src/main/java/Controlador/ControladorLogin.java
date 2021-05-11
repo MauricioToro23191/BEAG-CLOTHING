@@ -11,7 +11,6 @@ import Modelo.*;
 import ModeloDAO.*;
 import java.time.LocalDate;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,15 +74,7 @@ public class ControladorLogin extends HttpServlet {
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         HttpSession session=request.getSession();
-        switch (accion) {
-            case "Listar":
-//                List<Usuario> datos = dao.listar();
-//                request.setAttribute("datos", datos);
-//                request.getRequestDispatcher("inP.jsp").forward(request, response);
-                break;
-            case "Nuevo":
-//                request.getRequestDispatcher("add.jsp").forward(request, response);
-//                break;
+        switch (accion) {            
             case "Crear cuenta":
 
                 String correo = request.getParameter("txtCorreo");
@@ -97,7 +88,7 @@ public class ControladorLogin extends HttpServlet {
                 LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("txtFechaNacimiento"));
                 String telefono = request.getParameter("txtTelefono");
                 //int Municipio = dao.ValidarMunicipio(request.getParameter("CBMunicpio"));
-                //u.setId(1);
+                
                 u.setCorreo(correo);
                 u.setContrasena(contrasena);
                 u.setIdentificacion(identificacion);
@@ -111,10 +102,8 @@ public class ControladorLogin extends HttpServlet {
                 u.setMunicipio(4);
                 u.setTipoUsuario(2);
                 dao.agregar(u);
-                              
                 session=request.getSession();
                 session.setAttribute("usuario", u);
-                               
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
             case "Editar":
@@ -155,14 +144,14 @@ public class ControladorLogin extends HttpServlet {
                 u =dao.ObtenerUsuario(Correo, contra);
                 if(u!=null){
                    session.setAttribute("usuario", u);
+                   request.setAttribute("mensaje", "Bienvenido");
                    request.getRequestDispatcher("index.jsp").forward(request, response);
                 }else{
-                    JOptionPane.showMessageDialog(null,"Usuario Invalido");
+                    request.setAttribute("mensaje", "Usuario invalido");
                     request.getRequestDispatcher("Inicio_Sesion.jsp").forward(request, response);
                 }
                 break;
             case "Cerrar Sesion":
-               // HttpSession session=request.getSession();
                 session.invalidate();
                 request.getRequestDispatcher("index.jsp").forward(request, response);
                 break;
