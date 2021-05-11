@@ -3,6 +3,7 @@ package Modelo;
 import ModeloDAO.CarritoDAO;
 import ModeloDAO.ProductoDAO;
 import ModeloDAO.UsuarioDAO;
+import java.awt.HeadlessException;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.*;
@@ -18,7 +19,7 @@ public class Correo {
     String  usuario = "beagclothingppi@gmail.com",
             contrasena = "BeagClothing123",
             host = "smtp.gmail.com";
-    int     port  = 465;
+    int     port  = 587 ;
     
     public synchronized boolean sendMail(String para, String asunto,String mensaje){
         Properties props = new Properties();
@@ -43,12 +44,12 @@ public class Correo {
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(para));
 
             msg.saveChanges();
-            Transport transport = session.getTransport("smtp");
+            Transport transport = session.getTransport();
             transport.connect(this.host, this.usuario, this.contrasena);
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             return true;
-        } catch (MessagingException mex)
+        } catch (MessagingException mex )
         {
             mex.printStackTrace();
             return false;
@@ -61,7 +62,7 @@ public class Correo {
         CarritoDAO daoC=new CarritoDAO();
         Pedido ulPedido= daoC.obtenerUltimoPE();
         Properties props = new Properties();
-        props.put("mail.smtp.user", this.usuario );
+        props.put("mail.smtp.user", "mauriciotoro911@gmail.com" );
         props.put("mail.smtp.host", this.host);
         props.put("mail.smtp.port", this.port);
         props.put("mail.smtp.starttls.enable", "true");
@@ -104,18 +105,18 @@ public class Correo {
             msg.setContent(mensaje, "text/html");
             
             msg.setSubject("BEAG - Confirmación de la orden " + ulPedido.getId());
-            msg.setFrom(new InternetAddress(this.usuario));
-            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(usuario.getCorreo()));
+            msg.setFrom(new InternetAddress("mauriciotoro911@gmail.com"));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress("adrianaalvaraez12@gmail.com"));
 
             msg.saveChanges();
             Transport transport = session.getTransport("smtp");
-            transport.connect(this.usuario, this.contrasena);
+            transport.connect(this.host, "mauriciotoro911@gmail.com", "adriana123456789");
             transport.sendMessage(msg, msg.getAllRecipients());
             transport.close();
             JOptionPane.showMessageDialog(null, "Se envio un correo con los datos del pedido a su correo electronico, "
                     + "/r/npronto nos comunicaremos para ultimar detalles del pedido");
             return true;
-        } catch (MessagingException mex)
+        } catch (HeadlessException | MessagingException mex)
         {
             JOptionPane.showMessageDialog(null, mex.getMessage());
             return false;
