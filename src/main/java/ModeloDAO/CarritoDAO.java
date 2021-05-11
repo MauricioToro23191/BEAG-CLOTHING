@@ -8,6 +8,7 @@ package ModeloDAO;
 import Modelo.Carrito;
 import Modelo.Conexion;
 import Modelo.Correo;
+import Modelo.DetalleProducto;
 import Modelo.Pedido;
 import Modelo.Producto;
 import Modelo.Usuario;
@@ -134,28 +135,50 @@ public class CarritoDAO {
     }
 
     public void AgregarPedido(Usuario u, float total, float costoenvio) {
-
         List<Carrito> listaP = listar(u);
+       
 
         String sql = "INSERT INTO PEDIDO"
                 + "(ID_PEDIDO,TOTAL,COSTO_ENVIO,FECHA_PEDIDO,ESTADO,ID_USUARIO) "
                 + "VALUES(seq_pedido.nextval," + total + "," + costoenvio + ",sysdate," + 1 + "," + u.getId() + ")";
-        
         con = c.conectar();
         try {
-          ps = con.prepareStatement(sql);
-           ps.executeQuery();
+            ps = con.prepareStatement(sql);
+            ps.executeQuery();
             con.close();
-            DetallePedido(listaP,u);
-           
+            DetallePedido(listaP, u);
             ELiminarCarrito(u);
-            enviarCorreo(u,listaP);
+            //enviarCorreo(u, listaP);
             JOptionPane.showMessageDialog(null, "Se agrego un Pedido");
         } catch (SQLException ex) {
             Logger.getLogger(CarritoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    public Pedido obtenerPedidoXid(int id_pedido) {
+        String sql = "select id_pedido,total,costo_Envio,fecha_pedido,estado,id_usuario from pedido where id_pedido="+id_pedido;
 
+        try {
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            Pedido p = new Pedido();
+            while (rs.next()) {
+
+                p.setId(rs.getInt(1));
+                p.setTotal(rs.getInt(2));
+                p.setCostoEnvio(rs.getInt(3));
+                p.setFechaPedido(rs.getDate(4).toLocalDate());
+                p.setEstado(rs.getString(5));
+                p.setU(rs.getInt(6));
+
+            }
+
+            con.close();
+            return p;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        return null;
     }
 
     private void ELiminarCarrito(Usuario u) {
@@ -168,28 +191,79 @@ public class CarritoDAO {
         } catch (SQLException e) {
         }
     }
-    
-   public Pedido obtenerUltimoPE(){
+
+    public List<DetalleProducto> Listar_Detalle_producto(int id_pedido) {
+        List<DetalleProducto> li=new ArrayList<>();
+        if (id_pedido > 0) {
+            
+            ProductoDAO PDao= new ProductoDAO();
+            String sql = "select ID_DETALLE,CANTIDAD,PRECIO,ID_PRODUCTO from DETALLE_PRODUCTO where ID_PEDIDO=" + id_pedido;
+            try {
+                con = c.conectar();
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    DetalleProducto DP = new DetalleProducto();
+                    DP.setId(rs.getInt(1));
+                    DP.setCantidad(rs.getInt(2));
+                    DP.setPrecio(rs.getFloat(3));
+                    DP.setProducto(PDao.ObtenerXId(rs.getInt(4)));
+                    li.add(DP);
+                    DP=null;
+                }
+                con.close();
+                return li;
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+        }else{
+            ProductoDAO PDao= new ProductoDAO();
+            String sql = "select ID_DETALLE,CANTIDAD,PRECIO,ID_PRODUCTO, from DETALLE_PRODUCTO where ID_PEDIDO=(select min(id_pedido)from pedido where estado=1 )";
+            try {
+                con = c.conectar();
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+                
+                while (rs.next()) {
+                    DetalleProducto DP = new DetalleProducto();
+                    DP.setId(rs.getInt(1));
+                    DP.setCantidad(rs.getInt(2));
+                    DP.setPrecio(rs.getFloat(3));
+                    DP.setProducto(PDao.ObtenerXId(rs.getInt(4)));
+                    li.add(DP);
+                    DP=null;
+                }
+                con.close();
+                return li;
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.toString());
+            }
+        }
+        return null;
+
+    }
+
+    public Pedido obtenerUltimoPE() {
         String sql = "select id_pedido,total,costo_Envio,fecha_pedido,estado,id_usuario from pedido where id_pedido=(select max(id_pedido)from pedido)";
-        
+
         try {
             con = c.conectar();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             Pedido p = new Pedido();
             while (rs.next()) {
-                
+
                 p.setId(rs.getInt(1));
                 p.setTotal(rs.getInt(2));
                 p.setCostoEnvio(rs.getInt(3));
                 p.setFechaPedido(rs.getDate(4).toLocalDate());
                 p.setEstado(rs.getString(5));
                 p.setU(rs.getInt(6));
-                
+
             }
-            
+
             con.close();
-           return p;
+            return p;
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
         }
@@ -213,11 +287,11 @@ public class CarritoDAO {
     }
 
     private void enviarCorreo(Usuario U, List<Carrito> lista) {
-        Correo correo=new Correo();
+        Correo correo = new Correo();
         correo.confirmarPedido(U, lista);
     }
-    
-    public List<Pedido>  ListarPedido(){ 
+
+    public List<Pedido> ListarPedido() {
         List<Pedido> list = new ArrayList<>();
         String sql = "select id_pedido,total,costo_Envio,fecha_pedido,estado,id_usuario from pedido";
         try {
@@ -239,6 +313,24 @@ public class CarritoDAO {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return list;
+    }
+
+    public String obtenerEstadoP(String estado) {
+        switch (estado) {
+            // declaración case
+            // los valores deben ser del mismo tipo de la expresión
+            case "1":
+                return "Pendiente";
+            case "2":
+                return "en proceso";
+            case "3":
+                return "enviado";
+            case "4":
+                return "pago";
+            case "5":
+                return "candelado";
+        }
+        return "por definir";
     }
 
 }
