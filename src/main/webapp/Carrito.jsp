@@ -32,7 +32,7 @@
             <nav class="navbar">
                 <header class="nabvar-mobile is-size-5-mobile">
                     <a class="navbar-mobile-link has-text-white" href="#" id="btn-mobile">MENÚ</a>
-                    <a class="navbar-mobile-link has-text-white" href="index.jsp">BEAG CLOTHING</a>
+                    <a class="navbar-mobile-link has-text-white" href="#" >BEAG CLOTHING</a>
                 </header>
                 <nav class="nav-menu --nav-dark-light" id="mySidenav">
                     
@@ -44,11 +44,11 @@
                             <input type="text" class="form-group-input" placeholder="Buscar...">
                         </div>
                     </form>
-                    <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="UsuarioRegistrado.jsp">BEAG CLOTHING</a>
+                    <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="index.jsp">BEAG CLOTHING</a>
                     <ul class="nav-menu-ul">
                         
                         <li class="nav-menu-item" id="men">
-                            <a class="nav-menu-link link-submenu " href="UsuarioRegistrado.jsp">Inicio </a>
+                            <a class="nav-menu-link link-submenu " href="index.jsp">Inicio </a>
                         </li>
                         <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
@@ -64,7 +64,7 @@
                             }
                         %>
 
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link"> 
+                        <li class="nav-menu-item"><a href="index.jsp" class="nav-menu-link"> 
                                 <%
                                     try {
                                         Usuario u = (Usuario) session.getAttribute("usuario");
@@ -117,8 +117,8 @@
                                         out.println(html);
                                         SubTotal=SubTotal+ToralProduc;
                                     }
-                                    request.setAttribute("subTotal",SubTotal);
-                                    request.setAttribute("envio", envio);
+                                    session.setAttribute("subTotal",SubTotal);
+                                    session.setAttribute("envio", envio);
                                 } catch (Exception ex) {
                                     JOptionPane.showMessageDialog(null, ex.getMessage());
                                 }
@@ -139,13 +139,13 @@
                     <h4>Total <span name="total"id="subtotal">$<%= SubTotal+envio %></span> </h4>
                     <hr>
                     <form method="POST" action="ControladorCarrito">
-                        <input type="submit" value="Actualizar carrito" name="accion" class="botonActualizar" />
-                        <a href="Validar_Info_Envio.jsp"><input type="submit" value="Siguiente" name="accion" class="botonActualizar"/></a>
+                        <input type="submit" value="Agregar Producto" name="accion" class="botonActualizar" />
+                        <input type="submit" value="Realizar pedido" name="accion" class="botonActualizar"/>
                     </form>
                 </div>
             </div>
         </section>  
-                    <footer class="col-12">
+            <footer class="col-12">
             <h1>Pie de pagina</h1>
             <div>
                 <span>inicio</span>
