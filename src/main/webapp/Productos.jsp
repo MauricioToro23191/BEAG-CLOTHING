@@ -26,7 +26,6 @@
         <link href="css/material-dashboard.css" rel="stylesheet" />
 
     </head>
-
     <body>
         <div class="wrapper">
             <div class="sidebar" data-color="green" data-background-color="black" data-image="img/fondo1.jpg">
@@ -247,7 +246,6 @@
                                     <th>
                                         Acciones
                                     </th>
-
                                     </thead>
                                     <tbody>
                                         <%
@@ -277,18 +275,12 @@
                                                 out.println(html);
 
                                             }%>
-
                                     </tbody>
-
-
-
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
