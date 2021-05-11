@@ -11,12 +11,11 @@ import ModeloDAO.CarritoDAO;
 import ModeloDAO.ProductoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -83,17 +82,15 @@ public class ControladorCarrito extends HttpServlet {
             throws ServletException, IOException {
         String accion = request.getParameter("accion");
         switch (accion) {
-            
+            //agrega abre la ventana del popup, para agregar el producto
             case "Agregar al Carrito":
-                
                 int id = Integer.parseInt(request.getParameter("id"));
                 Producto p = dao.ObtenerXId(id);
                 request.setAttribute("prod", p);
                 request.getRequestDispatcher("POPup.jsp").forward(request, response);
                 break;
-            
+            //al confirmar en la ventana de popup se agrega el producto al carrito 
             case "Agregar":
-            
                 int id1 = Integer.parseInt(request.getParameter("id"));
                 p = dao.ObtenerXId(id1);
                 u = (Usuario) request.getSession().getAttribute("usuario");
@@ -102,12 +99,15 @@ public class ControladorCarrito extends HttpServlet {
                 daoCarrito.agregar(p, u, cantidad);
                 request.getRequestDispatcher("Carrito.jsp").forward(request, response);
                 break;
-            
-            case "Siguiente":
-                
+            //comienza el proceso de pasar el carrito a pedido, enviando a la ventana para confirmar datos
+            case "Realizar pedido":
                 request.getRequestDispatcher("Validar_Info_Envio.jsp").forward(request, response);
                 break;
-            
+            //redirecciona del carrito al inicio para agregar un producto
+            case"Agregar Producto":
+                 request.getRequestDispatcher("index.jsp").forward(request, response);
+                break;
+            //elimina un producto especifico del carrito
             case "X":
                 int idE =Integer.parseInt(request.getParameter("id"));
                 daoCarrito.Eliminar(idE);
