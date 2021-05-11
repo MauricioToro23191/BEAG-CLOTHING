@@ -43,7 +43,7 @@ public class UsuarioDAO {
                 u.setApellido1(rs.getString(5));
                 u.setApellido2(rs.getString(6));
                 u.setCorreo(rs.getString(7));
-                //u.setContrasena(rs.getString(8));
+                u.setContrasena(rs.getString(8));
                 u.setFechaNacimiento(rs.getDate(9).toLocalDate());
                 u.setDireccion(rs.getString(10));
                 u.setTelefono(rs.getString(11));
@@ -165,9 +165,35 @@ public class UsuarioDAO {
                 u.setTipoUsuario(rs.getInt(13));
                 u.setTipoUsuario(rs.getInt(14));
             }
+            
              con.close();
         } catch (SQLException ex) {
 
+        }
+        return u;
+    }
+    
+     public Usuario ObtenerID(int user) {
+        String sql = "SELECT * FROM USUARIO WHERE ID_USUARIO=" + user;
+        Usuario u = new Usuario();
+        try {
+
+            con = c.conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                u.setId(rs.getInt(1));
+                u.setIdentificacion(rs.getString(2));
+                u.setNombre1(rs.getString(3));
+                u.setNombre2(rs.getString(4));
+                u.setApellido1(rs.getString(5));
+                u.setApellido2(rs.getString(6));
+             
+            }
+            
+             con.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
         return u;
     }
