@@ -28,13 +28,13 @@
     <body>
         <div class="wrapper ">
       
-            <div class="sidebar" data-color="azure" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
+            <div class="sidebar" data-color="green" data-background-color="black" data-image="../assets/img/sidebar-2.jpg">
                 <!--
                   Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
           
                   Tip 2: you can also add an image using data-image tag
                 -->
-                <div class="logo"><a href="UsuarioRegistrado.jsp" class="simple-text logo-normal">
+                <div class="logo"><a href="index.jsp" class="simple-text logo-normal">
                         BEAG CLOTHING
                     </a></div>
                 <div class="sidebar-wrapper">
