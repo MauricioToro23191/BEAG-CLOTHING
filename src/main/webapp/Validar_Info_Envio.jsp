@@ -17,6 +17,7 @@
         <title>BEAG | Confirmar datos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.8.0/sweetalert2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/bulma.min.css">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/Estilo_carrito.css">
@@ -40,11 +41,11 @@
                             <input type="text" class="form-group-input" placeholder="Buscar...">
                         </div>
                     </form>
-                    <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="UsuarioRegistrado.jsp">BEAG CLOTHING</a>
+                    <a class="is-hidden-mobile brand is-uppercase has-text-weight-bold has-text-dark" href="index.jsp">BEAG CLOTHING</a>
                     <ul class="nav-menu-ul">
 
                         <li class="nav-menu-item" id="men">
-                            <a class="nav-menu-link link-submenu " href="UsuarioRegistrado.jsp">Inicio </a>
+                            <a class="nav-menu-link link-submenu " href="index.jsp">Inicio </a>
                         </li>
                         <li class="nav-menu-item active" id="women">
                             <a href="Carrito.jsp" class="nav-menu-link link-submenu">Carrito</a>
@@ -60,7 +61,7 @@
                             }
                         %>
 
-                        <li class="nav-menu-item"><a href="UsuarioRegistrado.jsp" class="nav-menu-link"> 
+                        <li class="nav-menu-item"><a href="index.jsp" class="nav-menu-link"> 
                                 <%
                                     try {
                                         Usuario u = (Usuario) session.getAttribute("usuario");
@@ -84,16 +85,15 @@
                     String Celular = "";
                     Usuario u = (Usuario) session.getAttribute("usuario");
                     try {
-                        
-                        
+
                         if (u.getNombre2() != null) {
                             Nombre2 = u.getNombre2();
                         }
-                        
+
                         if (u.getApellido2() != null) {
                             Apellido2 = u.getApellido2();
                         }
-                        
+
                         if (u.getCelular() != null) {
                             Celular = u.getCelular();
                         }
@@ -170,19 +170,17 @@
                                 <div class="col-5 col-s-10">
                                     <input type="hidden" value="<%=u.getId()%>" name="id">
                                     <div class="col-6 col-s-10">
-                                        <input type="submit" Style="margin-right:  10px "  class="botonActualizar " value="Guardar Cambios" name="accion">
+                                        <input type="submit" Style="margin-right:  10px " class="botonActualizar " value="Finalizar pedido" name="accion">
                                     </div>
                                     <div class="col-6 col-s-10">
-                                        <input type="submit" Style="margin-left:  53px" class="botonCaja" value="Cancelar" name="accion">
+                                        <input type="submit"  Style="margin-left:  53px" class="botonCaja"  value="Cancelar" name="accion">
                                     </div>
                                 </div>  
                             </form>
                         </div>
-
                     </div>
                 </centrer>
             </div>
-
         </section>
         <footer class="col-12">
             <h1>Pie de pagina</h1>
